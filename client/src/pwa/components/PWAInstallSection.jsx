@@ -102,7 +102,7 @@ const PWAInstallSection = () => {
                   </h2>
                   
                   <p className="text-lg sm:text-xl text-slate-400 mt-8 max-w-xl leading-relaxed mx-auto lg:mx-0">
-                    Install the Bravynex PWA for a hyper-fast, immersive learning environment. No app stores, no updates to wait for—just one tap away.
+                    Install the Nexora Learn PWA for a hyper-fast, immersive learning environment. No app stores, no updates to wait for—just one tap away.
                   </p>
                 </div>
 

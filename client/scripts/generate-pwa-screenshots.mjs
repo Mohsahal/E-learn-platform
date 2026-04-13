@@ -21,7 +21,7 @@ const wide = `<?xml version="1.0" encoding="UTF-8"?>
   <circle cx="980" cy="260" r="240" fill="url(#a)" opacity="0.12"/>
   <circle cx="380" cy="520" r="260" fill="url(#a)" opacity="0.10"/>
   <rect x="88" y="96" width="1104" height="528" rx="40" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.10)"/>
-  <text x="140" y="190" font-family="Segoe UI, Inter, Arial" font-size="40" font-weight="800" fill="#e2e8f0">Bravynex LMS</text>
+  <text x="140" y="190" font-family="Segoe UI, Inter, Arial" font-size="40" font-weight="800" fill="#e2e8f0">Nexora Learn</text>
   <text x="140" y="250" font-family="Segoe UI, Inter, Arial" font-size="22" font-weight="600" fill="#94a3b8">Installable • Offline-ready • Fast</text>
   <text x="140" y="355" font-family="Segoe UI, Inter, Arial" font-size="56" font-weight="900" fill="url(#a)">Learn like an app</text>
   <text x="140" y="415" font-family="Segoe UI, Inter, Arial" font-size="24" font-weight="600" fill="#cbd5e1">Save to your Home Screen for the best experience.</text>
@@ -47,7 +47,7 @@ const narrow = `<?xml version="1.0" encoding="UTF-8"?>
   <circle cx="540" cy="360" r="260" fill="url(#a)" opacity="0.12"/>
   <circle cx="230" cy="980" r="280" fill="url(#a)" opacity="0.10"/>
   <rect x="72" y="120" width="606" height="1094" rx="44" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.10)"/>
-  <text x="120" y="240" font-family="Segoe UI, Inter, Arial" font-size="34" font-weight="800" fill="#e2e8f0">Bravynex</text>
+  <text x="120" y="240" font-family="Segoe UI, Inter, Arial" font-size="34" font-weight="800" fill="#e2e8f0">Nexora Learn</text>
   <text x="120" y="295" font-family="Segoe UI, Inter, Arial" font-size="20" font-weight="600" fill="#94a3b8">Install and learn offline</text>
   <text x="120" y="430" font-family="Segoe UI, Inter, Arial" font-size="50" font-weight="900" fill="url(#a)">Mobile</text>
   <text x="120" y="490" font-family="Segoe UI, Inter, Arial" font-size="50" font-weight="900" fill="#f8fafc">experience</text>

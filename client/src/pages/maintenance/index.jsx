@@ -21,7 +21,7 @@ function MaintenancePage() {
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight">
             We&apos;re updating{" "}
             <span className="text-cyan-400 drop-shadow-[0_0_30px_rgba(34,211,238,0.5)]">
-              Bravynex LMS
+              Nexora Learn
             </span>
           </h1>
           <p className="text-sm sm:text-base text-slate-400 max-w-md mx-auto">

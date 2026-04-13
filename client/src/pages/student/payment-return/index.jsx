@@ -155,7 +155,7 @@ function PaypalPaymentReturnPage() {
           {renderContent()}
         </CardContent>
         <div className="p-6 bg-white/[0.01] border-t border-white/5 text-center">
-           <p className="text-[9px] font-black uppercase tracking-[0.3em] text-gray-800">Bravynex Engineering Secure Payment Gateway v2.4.0</p>
+           <p className="text-[9px] font-black uppercase tracking-[0.3em] text-gray-800">Nexora Learn Secure Payment Gateway v2.4.0</p>
         </div>
       </Card>
     </div>

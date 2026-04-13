@@ -40,12 +40,12 @@ const SOCIAL_LINKS = [
   },
   {
     icon: Instagram,
-    href: "https://www.instagram.com/bravynexengineering?igsh=MTdnbmVyaGR0amExcA%3D%3D&utm_source=qr",
+    href: "#",
     label: "Instagram", color: "#e1306c",
   },
   {
     icon: Linkedin,
-    href: "https://www.linkedin.com/in/bravynex-engineering-a8211836b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
+    href: "#",
     label: "LinkedIn", color: "#0077b5",
   },
 ];
@@ -77,7 +77,7 @@ function Footer() {
           {/* Logo mark */}
           {/* <div className="flex items-center gap-2 mb-4">
            
-           <img src="/images/logo.png" alt="BravyNex Logo" style={{ maxHeight: '120px', maxWidth: '200px', objectFit: 'contain', transition: 'transform 0.2s'}} />
+           <img src="/images/logo.png" alt="Nexora Learn Logo" style={{ maxHeight: '120px', maxWidth: '200px', objectFit: 'contain', transition: 'transform 0.2s'}} />
             
           </div> */}
 

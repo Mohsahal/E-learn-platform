@@ -111,7 +111,7 @@ function StudentFeedbackSupportPage() {
             </h1>
             <p className="fb-desc text-gray-400 max-w-lg text-lg leading-relaxed">
               Need help? Log a support ticket or share your feedback. Our dedicated 
-              engineering team will review and respond to your inquiry promptly.
+              support team will review and respond to your inquiry promptly.
             </p>
           </div>
           <Button

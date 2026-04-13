@@ -53,7 +53,7 @@ function StudentCoursesPage() {
               </span>
             </h1>
             <p className="text-slate-400 max-w-md">
-              Access your enrolled courses, track your progress, and continue your professional engineering journey.
+              Access your enrolled courses, track your progress, and continue your professional learning journey.
             </p>
           </div>
           <div className="flex items-center gap-4">
@@ -123,7 +123,7 @@ function StudentCoursesPage() {
               <Zap className="w-8 h-8 text-gray-700" />
             </div>
             <h3 className="text-xl font-black text-white mb-2">No active enrollments</h3>
-            <p className="text-gray-500 mb-8 max-w-sm mx-auto italic">Your dashboard is empty. Discover the perfect technology track to launch your engineering career.</p>
+            <p className="text-gray-500 mb-8 max-w-sm mx-auto italic">Your dashboard is empty. Discover the perfect technology track to launch your tech career.</p>
             <Button
               onClick={() => navigate("/courses")}
               className="bg-blue-600 hover:bg-blue-700 text-white font-black uppercase tracking-widest text-xs px-10 h-14 rounded-xl shadow-lg shadow-blue-600/20"

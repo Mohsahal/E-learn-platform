@@ -45,7 +45,7 @@ function NotFoundPage() {
             </Button>
           </Link>
           <div className="hidden sm:block h-10 w-px bg-white/10" />
-          <p className="text-[9px] font-black uppercase tracking-[0.4em] text-gray-800">Bravynex Engineering Terminal v1.0.4</p>
+          <p className="text-[9px] font-black uppercase tracking-[0.4em] text-gray-800">Nexora Learn Terminal v1.0.4</p>
         </div>
       </div>
 

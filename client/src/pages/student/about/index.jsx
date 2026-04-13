@@ -163,7 +163,7 @@ function AboutPage() {
             <p className="about-desc text-lg sm:text-2xl text-gray-400 max-w-2xl leading-relaxed">
               Nexora Learn is a forward-thinking product and service-based company
               dedicated to delivering industrial solutions that bridge the gap
-              between academic theory and high-stakes engineering.
+              between academic theory and high-stakes technology.
             </p>
           </div>
         </div>

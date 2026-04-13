@@ -133,7 +133,7 @@ function AuthPage() {
               <span style={{
                 background: "linear-gradient(135deg, #60a5fa, #c084fc)",
                 WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
-              }}>engineering career.</span>
+              }}>learning journey.</span>
             </h2>
             <div className="flex gap-6 mt-6">
               {[["10K+", "Interns"], ["4.9★", "Rating"], ["95%", "Placed"]].map(([v, l]) => (
@@ -270,7 +270,7 @@ function AuthPage() {
                     onClick={() =>
                       (window.location.href = `${
                         import.meta.env.VITE_API_BASE_URL ||
-                        "http://localhost:5000"
+                        "https://lms-server-46c6.onrender.com"
                       }/auth/github?mode=${activeTab}`)
                     }
                     className="flex items-center justify-center gap-3 py-3 px-4 rounded-xl transition-all duration-300 hover:bg-white/[0.05] border border-white/[0.08] active:scale-95 group relative overflow-hidden flex-1"

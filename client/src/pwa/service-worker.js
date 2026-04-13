@@ -12,7 +12,7 @@ import { setCacheNameDetails, clientsClaim } from "workbox-core";
 // 1. Precise Versioning for Cache Busting (Requirement 3)
 const CACHE_VERSION = "lms-app-v2.2.0"; 
 setCacheNameDetails({
-  prefix: "bravynex",
+  prefix: "nexora-learn",
   suffix: CACHE_VERSION,
   precache: "precache",
   runtime: "runtime",

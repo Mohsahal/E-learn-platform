@@ -78,7 +78,7 @@ const FEATURES = [
   {
     icon: Rocket,
     title: "Launch-Ready Curriculum",
-    desc: "Programs co-designed with engineering leaders. Go from zero to deployment in weeks — not months.",
+    desc: "Programs co-designed with industry leaders. Go from zero to deployment in weeks — not months.",
     color: "#3b82f6",
     gradient: "from-blue-500/15 to-indigo-500/5",
   },
@@ -489,10 +489,10 @@ function StudentHomePage() {
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
               }}>
-                Real-World
+                New
               </span>
               <br className="hidden sm:block" />
-              <span style={{ color: "#f0f9ff" }}> Engineering</span>
+              <span style={{ color: "#f0f9ff" }}> Skills</span>
               <br className="hidden sm:block" />
               <span style={{
                 background: "linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%)",
@@ -500,7 +500,7 @@ function StudentHomePage() {
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
               }}>
-                {" "}Skills.
+                {" "}Online.
               </span>
             </h1>
 
@@ -508,7 +508,7 @@ function StudentHomePage() {
             <p className="hero-subtitle text-sm sm:text-lg leading-relaxed mb-8 max-w-lg"
               style={{ color: "#94a3b8" }}>
               Comprehensive technology training built with industry leaders. Live projects,
-              expert instructors, and verified certificates — designed for the modern engineer.
+              expert instructors, and verified certificates — designed for the modern professional.
             </p>
 
             {/* CTAs */}
@@ -767,7 +767,7 @@ function StudentHomePage() {
               <div className="fade-up">
                 <span className="section-badge mb-6 inline-flex">
                   <Shield className="w-3 h-3" />
-                  Verified Engineering Certifications
+                  Verified Professional Certifications
                 </span>
                 <h2 className="text-3xl sm:text-6xl font-black leading-tight mt-4">
                   <span style={{ color: "#f0f9ff" }}>Direct </span>
@@ -779,7 +779,7 @@ function StudentHomePage() {
                   <span style={{ color: "#f0f9ff" }}>Pipeline.</span>
                 </h2>
                 <p className="text-lg mt-6" style={{ color: "#64748b" }}>
-                  Bravynex is more than just a course platform. It&apos;s a career-accelerator designed to bridge the gap between academic theory and high-stakes engineering roles.
+                  Nexora Learn is more than just a course platform. It&apos;s a career-accelerator designed to bridge the gap between academic theory and high-stakes tech roles.
                 </p>
               </div>
 

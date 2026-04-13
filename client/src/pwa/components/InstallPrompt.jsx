@@ -21,7 +21,7 @@ const InstallPrompt = () => {
     if (isInstalled) {
       toast({
         title: "App installed successfully!",
-        description: "Bravynex LMS is now on your home screen.",
+        description: "Nexora Learn is now on your home screen.",
         duration: 10000,
         action: (
           <Button size="sm" variant="outline" onClick={() => window.location.href = "/home"}>
@@ -99,7 +99,7 @@ const InstallPrompt = () => {
                 {isAndroid ? <Smartphone className="h-5 w-5" /> : <Laptop className="h-5 w-5" />}
               </div>
               <div>
-                <CardTitle className="text-sm font-bold uppercase tracking-tight">Experience Bravynex LMS</CardTitle>
+                <CardTitle className="text-sm font-bold uppercase tracking-tight">Experience Nexora Learn</CardTitle>
                 <CardDescription className="text-[10px] uppercase font-semibold text-muted-foreground/60 leading-tight">Fast, offline learning ready.</CardDescription>
               </div>
             </div>

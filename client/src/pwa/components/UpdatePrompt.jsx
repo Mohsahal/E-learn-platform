@@ -17,7 +17,7 @@ const UpdatePrompt = () => {
     (registration) => {
       toast({
         title: "New Update Available!",
-        description: "A newer version of Bravynex is ready. Refresh to update.",
+        description: "A newer version of Nexora Learn is ready. Refresh to update.",
         duration: Infinity, // Keep visible until user acts
         action: (
           <Button
@@ -47,7 +47,7 @@ const UpdatePrompt = () => {
     if (isUpdating) {
       toast({
         title: "App Updated Successfully 🎉",
-        description: "Bravynex is now running the latest version.",
+        description: "Nexora Learn is now running the latest version.",
         duration: 5000,
       });
       sessionStorage.removeItem("pwa_updated");

@@ -233,7 +233,7 @@ function CertificatesManagementPage() {
              <div className="w-1.5 h-8 bg-blue-500 rounded-full shadow-[0_0_15px_rgba(59,130,246,0.5)]" />
              <h1 className="text-3xl font-black text-white tracking-tight uppercase italic">Certificates <span className="text-blue-500 font-black">Nexus</span></h1>
           </div>
-          <p className="text-gray-500 font-medium text-sm ml-4">Authenticate and finalize professional engineering certifications.</p>
+          <p className="text-gray-500 font-medium text-sm ml-4">Authenticate and finalize professional course certifications.</p>
         </div>
         
         <div className="flex flex-wrap gap-4">
