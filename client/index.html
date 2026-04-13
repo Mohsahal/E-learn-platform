@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en" style="background-color: #020617;">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#0b1220" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+  <title>Nexora Learn</title>
+  <script>
+    // Critical: Capture the PWA install prompt at the very beginning
+    window.deferredPWAPrompt = null;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      window.deferredPWAPrompt = e;
+      window.dispatchEvent(new CustomEvent('pwa-prompt-ready'));
+    });
+    window.addEventListener('appinstalled', () => {
+      window.deferredPWAPrompt = null;
+    });
+  </script>
+</head>
+
+<body style="background-color: #020617;">
+  <div id="root">
+    <style>
+      .splash-bg {
+        background-color: #020617;
+        position: fixed;
+        inset: 0;
+        overflow: hidden;
+        z-index: 10000;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .splash-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.1;
+        pointer-events: none;
+      }
+
+      .orb-1 {
+        top: -100px;
+        right: -100px;
+        width: 600px;
+        height: 600px;
+        background: #3b82f6;
+      }
+
+      .orb-2 {
+        bottom: -100px;
+        left: -100px;
+        width: 500px;
+        height: 500px;
+        background: #a855f7;
+      }
+
+      .splash-grid {
+        position: absolute;
+        inset: 0;
+        background-image: linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+        background-size: 50px 50px;
+        opacity: 0.5;
+        pointer-events: none;
+      }
+
+      .skeleton {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.03);
+        border-radius: 12px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .skeleton::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        transform: translateX(-100%);
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+        animation: shimmer 2s infinite;
+      }
+
+      @keyframes shimmer {
+        100% { transform: translateX(100%); }
+      }
+
+      .container {
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 2rem;
+        position: relative;
+        z-index: 10;
+      }
+
+      /* Header */
+      .header {
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .logo-shimmer { width: 140px; height: 32px; }
+      .nav-shimmer { width: 400px; height: 16px; display: none; }
+      @media (min-width: 768px) { .nav-shimmer { display: block; } }
+
+      /* Hero */
+      .hero {
+        padding: 100px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1.5rem;
+      }
+
+      .hero-title { width: 70%; height: 64px; border-radius: 20px; }
+      .hero-subtitle { width: 40%; height: 20px; }
+      .hero-btn { width: 200px; height: 50px; border-radius: 16px; margin-top: 1rem; }
+
+      /* Cards Grid */
+      .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1.5rem;
+        padding-bottom: 100px;
+      }
+
+      @media (min-width: 640px) { .cards-grid { grid-template-columns: repeat(2, 1fr); } }
+      @media (min-width: 1024px) { .cards-grid { grid-template-columns: repeat(3, 1fr); } }
+
+      .card-shimmer { aspect-ratio: 16/10; border-radius: 24px; }
+    </style>
+    <div class="splash-bg">
+      <div class="splash-orb orb-1"></div>
+      <div class="splash-orb orb-2"></div>
+      <div class="splash-grid"></div>
+    </div>
+  </div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
+</html>
