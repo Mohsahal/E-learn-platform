@@ -77,29 +77,29 @@ const HERO_STATS = [
 const FEATURES = [
   {
     icon: Rocket,
-    title: "Launch-Ready Curriculum",
-    desc: "Programs co-designed with industry leaders. Go from zero to deployment in weeks — not months.",
+    title: "Structured Courses",
+    desc: "Well-organized programs co-designed with industry leaders. Go from beginner to advanced seamlessly.",
     color: "#3b82f6",
     gradient: "from-blue-500/15 to-indigo-500/5",
   },
   {
     icon: BrainCircuit,
-    title: "AI-Powered Learning Path",
+    title: "Personalized Learning",
     desc: "Smart recommendations adapt to your pace. Focus on gaps, accelerate strengths, track in real-time.",
     color: "#a855f7",
     gradient: "from-purple-500/15 to-fuchsia-500/5",
   },
   {
     icon: MonitorPlay,
-    title: "Live Project Experience",
-    desc: "Work on real client briefs with team-based sprints. Build a portfolio that employers actually want.",
+    title: "Hands-on Practice",
+    desc: "Engage with interactive coding exercises and real-world scenarios to build a practical skill set.",
     color: "#06b6d4",
     gradient: "from-cyan-500/15 to-blue-500/5",
   },
   {
     icon: GraduationCap,
-    title: "Mentor-Led Certification",
-    desc: "Get certified under senior engineers. Verified blockchain credentials recognized industry-wide.",
+    title: "Course Certificates",
+    desc: "Earn verified certificates upon successful completion to showcase your commitment to skill development.",
     color: "#10b981",
     gradient: "from-emerald-500/15 to-cyan-500/5",
   },
@@ -109,14 +109,14 @@ const TESTIMONIALS = [
   {
     name: "Arjun Mehta",
     role: "Full Stack Engineer",
-    text: "Nexora Learn's training transformed how I think about code. Real projects, real instructors — I had an offer within 3 months of completing my certification.",
+    text: "Nexora Learn's training transformed how I think about code. Structured learning paths, real instructors — I gained incredible hands-on practice and confidence in my abilities.",
     avatar: "AM",
     color: "#3b82f6",
   },
   {
     name: "Priya Sharma",
     role: "Data Scientist ",
-    text: "The VLSI and Data Science tracks were genuinely industry-level. This is the most structured learning experience I've had.",
+    text: "The VLSI and Data Science tracks were incredibly comprehensive. This is the most structured learning experience I've had.",
     avatar: "PS",
     color: "#a855f7",
   },
@@ -767,19 +767,19 @@ function StudentHomePage() {
               <div className="fade-up">
                 <span className="section-badge mb-6 inline-flex">
                   <Shield className="w-3 h-3" />
-                  Verified Professional Certifications
+                  E-learning Platform Overview
                 </span>
                 <h2 className="text-3xl sm:text-6xl font-black leading-tight mt-4">
-                  <span style={{ color: "#f0f9ff" }}>Direct </span>
+                  <span style={{ color: "#f0f9ff" }}>Accelerate </span>
                   <span style={{
                     background: "linear-gradient(135deg, #60a5fa, #c084fc)",
                     WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
-                  }}>Career </span>
+                  }}>Your </span>
                   <br className="hidden sm:block" />
-                  <span style={{ color: "#f0f9ff" }}>Pipeline.</span>
+                  <span style={{ color: "#f0f9ff" }}>Learning.</span>
                 </h2>
                 <p className="text-lg mt-6" style={{ color: "#64748b" }}>
-                  Nexora Learn is more than just a course platform. It&apos;s a career-accelerator designed to bridge the gap between academic theory and high-stakes tech roles.
+                  Nexora Learn is a modern e-learning platform. It&apos;s a comprehensive resource designed to bridge the gap between academic theory and practical tech skills.
                 </p>
               </div>
 
@@ -787,14 +787,14 @@ function StudentHomePage() {
                 {[
                   {
                     icon: Code2,
-                    title: "Live Project Experience",
-                    desc: "Skip the toy projects. Work on actual industrial codebases with senior engineer oversight.",
+                    title: "Interactive Learning",
+                    desc: "Engage with hands-on practice using structured, real-world examples.",
                     color: "#3b82f6"
                   },
                   {
                     icon: BrainCircuit,
-                    title: "Expert Instruction",
-                    desc: "Interactive sessions and Q&A with domain experts from top-tier tech companies.",
+                    title: "Expert-Led Learning",
+                    desc: "Interactive sessions and Q&A with domain experts to deepen your understanding.",
                     color: "#a855f7"
                   },
                   {

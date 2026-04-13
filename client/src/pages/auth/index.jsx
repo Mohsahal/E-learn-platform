@@ -136,7 +136,7 @@ function AuthPage() {
               }}>learning journey.</span>
             </h2>
             <div className="flex gap-6 mt-6">
-              {[["10K+", "Interns"], ["4.9★", "Rating"], ["95%", "Placed"]].map(([v, l]) => (
+              {[["10K+", "Students"], ["4.9★", "Rating"], ["95%", "Certified"]].map(([v, l]) => (
                 <div key={l}>
                   <p className="text-xl font-black" style={{ color: "#f0f9ff" }}>{v}</p>
                   <p className="text-xs" style={{ color: "#475569" }}>{l}</p>

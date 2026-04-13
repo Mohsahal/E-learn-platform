@@ -156,14 +156,12 @@ function AboutPage() {
                 Our Journey
               </span>
               <br />
-              <span className="text-white">& Industrial </span>
+              <span className="text-white">& E-Learning </span>
               <br />
               <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Innovation</span>
             </h1>
             <p className="about-desc text-lg sm:text-2xl text-gray-400 max-w-2xl leading-relaxed">
-              Nexora Learn is a forward-thinking product and service-based company
-              dedicated to delivering industrial solutions that bridge the gap
-              between academic theory and high-stakes technology.
+              Nexora Learn is a modern E-learning platform dedicated to delivering quality tech education that bridges the gap between academic theory and practical skills.
             </p>
           </div>
         </div>
@@ -180,9 +178,7 @@ function AboutPage() {
               About Nexora Learn
             </h2>
             <p className="text-gray-400 leading-relaxed text-base">
-              Product and service-based company dedicated to delivering quality
-              solutions officially registered under MSME, Government of India,
-              ensuring institutional excellence.
+              Modern E-learning platform dedicated to delivering quality online courses and accessible tech education, ensuring continuous skill development for everyone.
             </p>
           </div>
           <div className="about-grid-item glass-card p-10 group h-full flex flex-col border-white/5 hover:border-purple-500/30">
@@ -193,9 +189,8 @@ function AboutPage() {
               Our Objectives
             </h2>
             <p className="text-gray-400 leading-relaxed text-base">
-              To empower individuals with skills needed to excel in tech by
-              providing specialized training and real-world project exposure for
-              IT and non-IT sectors.
+              To make quality tech education accessible to everyone by
+              providing structured courses and hands-on practice for IT and non-IT sectors.
             </p>
           </div>
         </div>
@@ -208,15 +203,15 @@ function AboutPage() {
                 Instruction
               </span>
               <h3 className="text-3xl font-black text-white mb-6">
-                Expert Instructor Network
+                Expert-Led Learning
               </h3>
               <p className="text-gray-400 text-lg leading-relaxed">
-                Our instructors are industry veterans with{" "}
+                Our instructors are seasoned professionals with{" "}
                 <span className="text-white font-bold">
-                  15+ years of experience
+                  deep domain expertise
                 </span>
-                , bringing real-world case studies to help you gain skills that
-                are actually in demand.
+                , bringing structured learning paths to help you master skills that
+                are highly valued.
               </p>
             </div>
             <div className="w-full lg:w-1/3 rounded-2xl overflow-hidden border border-white/10">
@@ -233,15 +228,14 @@ function AboutPage() {
                 Success
               </span>
               <h3 className="text-3xl font-black text-white mb-6">
-                Proven Track Record
+                Certified Learners
               </h3>
               <p className="text-gray-400 text-lg leading-relaxed">
                 We have{" "}
                 <span className="text-white font-bold">
-                  successfully trained 500+ students
+                  successfully certified 10,000+ students
                 </span>{" "}
-                who are now working at leading technology firms globally, thanks
-                to our personalized career support.
+                who have completed our structured courses and improved their practical capabilities worldwide.
               </p>
             </div>
             <div className="w-full lg:w-1/3 rounded-2xl overflow-hidden border border-white/10">
@@ -260,18 +254,15 @@ function AboutPage() {
             <Eye className="w-8 h-8 text-blue-400 mb-6" />
             <h2 className="text-2xl font-black text-white mb-4">Our Vision</h2>
             <p className="text-gray-400">
-              To be a global leader in delivering innovative products and
-              reliable services that empower businesses and enrich lives through
-              technology.
+              Empower learners worldwide with practical skills through an innovative E-learning platform that transforms potential into excellence.
             </p>
           </div>
           <div className="glass-card p-10 border-t-2 border-purple-500/20">
             <Lightbulb className="w-8 h-8 text-purple-400 mb-6" />
             <h2 className="text-2xl font-black text-white mb-4">Our Mission</h2>
             <p className="text-gray-400">
-              To create exceptional value for customers through quality products
-              and personalized services, fostering lifelong innovation and
-              integrity.
+              To make quality tech education accessible to everyone, providing hands-on practice,
+              structured learning paths, and course completion certificates.
             </p>
           </div>
         </div>
