@@ -40,6 +40,7 @@ const verifyCertificate = async (req, res) => {
         studentId: approval.customStudentId || student?.studentId, // Custom student ID (NXL-STU-XXXX)
         studentName: approval.studentName || student?.userName,
         studentFatherName: approval.studentFatherName,
+        studentCollegeName: approval.studentCollegeName,
         courseTitle: approval.courseTitle || course?.title,
         grade: approval.grade,
         issueDate: approval.approvedAt || approval.createdAt,

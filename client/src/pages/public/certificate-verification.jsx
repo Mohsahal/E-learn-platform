@@ -190,9 +190,9 @@ export default function CertificateVerificationPage() {
 
               <div className="grid gap-4 md:grid-cols-2 pt-6 border-t border-white/5">
                 <InfoTile
-                  icon={User}
-                  label="Student Record"
-                  value={verification?.studentName}
+                  icon={Shield}
+                  label="Institutional Affiliation"
+                  value={verification?.studentCollegeName || "Verified Professional"}
                   highlight={verification?.studentId ? `NODE_REF: ${verification.studentId}` : null}
                 />
                 <InfoTile

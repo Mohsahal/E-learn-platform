@@ -8,7 +8,7 @@ function buildJsonLimiter(options) {
     max,
     message = "Too many attempts. Please try again later.",
     keyGenerator,
-    skip = () => process.env.NODE_ENV !== "production", // Completely skip rate limiting in dev
+    skip = () => false, // Rate limiting is now active by default in all environments
   } = options;
 
   return rateLimit({
@@ -27,8 +27,8 @@ function buildJsonLimiter(options) {
       : undefined, // Uses memory store in dev
     handler: (req, res /*, next */) => {
       // Allow unrestricted access in development
-      if (process.env.NODE_ENV !== "production") {
-        return res.status(200).json({ success: true, message: "Rate limit bypassed in DEV" }); // Only used if skip fails
+      if (process.env.NODE_ENV !== "production" && !redisClient.isOpen) {
+        return res.status(200).json({ success: true, message: "Rate limit bypassed in DEV (Redis down)" });
       }
       return res.status(429).json({
         success: false,

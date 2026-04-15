@@ -4,9 +4,9 @@ const fetch = require("node-fetch");
 const RESEND_API_KEY = process.env.RESEND_API_KEY || ""; // leave blank in development if you don't have one
 const RESEND_API_URL = "https://api.resend.com/emails";
 // Resend requires onboarding@resend.dev for testing or your verified domain
-const FROM_EMAIL = process.env.FROM_EMAIL || "no-reply@Astra.in";
+const FROM_EMAIL = "onboarding@resend.dev";
 
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "Astra@gmail.com";
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "mohammedsahal1243@gmail.com";
 
 /**
  * Send contact form email using Resend API

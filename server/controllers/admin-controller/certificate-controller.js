@@ -190,21 +190,31 @@ const approveCertificateRequest = async (req, res) => {
     // Generate unique certificate ID
     const certificateId = `CERT-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
     
+    // Fetch enrollment certificate details if available
+    const progress = await CourseProgress.findOne({ 
+      userId: certificate.studentId, 
+      courseId: certificate.courseId 
+    });
+    
+    const enrollmentDetails = progress?.certificateDetails || {};
+    
     // Update certificate approval
     certificate.approvedBy = adminId;
     certificate.approvedAt = new Date();
     certificate.revoked = false;
     certificate.revokedAt = null;
     certificate.certificateId = certificateId;
-    certificate.studentName = student.userName;
-    certificate.studentEmail = student.userEmail;
-    certificate.studentFatherName = student.guardianName || student.guardianDetails;
+    certificate.studentName = enrollmentDetails.fullName || student.userName;
+    certificate.studentEmail = enrollmentDetails.email || student.userEmail;
+    certificate.studentPhone = enrollmentDetails.phone;
+    certificate.studentFatherName = enrollmentDetails.fatherName || student.guardianName || student.guardianDetails;
+    certificate.studentCollegeName = enrollmentDetails.collegeName;
     certificate.customStudentId = student.studentId;
     certificate.courseTitle = course.certificateCourseName || course.title;
     certificate.grade = grade || certificate.grade || "A+";
     certificate.notes = notes || certificate.notes;
     
-    console.log(`Generated Certificate ID: ${certificateId} for CertificateApproval ID: ${certificate._id}`);
+    console.log(`Generated Certificate ID: ${certificateId} using name: ${certificate.studentName}`);
     await certificate.save();
     
     res.status(200).json({
