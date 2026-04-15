@@ -8,16 +8,25 @@ const approveCertificate = async (req, res) => {
     const { courseId, studentId } = req.body;
     const approverId = req.body.approverId || req.user?._id || req.user?.id;
     if (!courseId || !studentId) return res.status(400).json({ success: false, message: "courseId and studentId are required" });
-    // Fetch snapshot details
-    const [user, course] = await Promise.all([
+    // Fetch enrollment certificate details if available
+    const CourseProgress = require("../../models/CourseProgress");
+    const [user, course, progress] = await Promise.all([
       User.findById(studentId),
       Course.findById(courseId),
+      CourseProgress.findOne({ userId: studentId, courseId })
     ]);
-    const studentName = user?.userName || user?.userEmail || String(studentId);
-    const studentEmail = user?.userEmail || undefined;
-    const studentFatherName = user?.guardianName || user?.guardianDetails || undefined;
-    const customStudentId = user?.studentId || undefined; // Custom student ID (AST-STU-XXXX)
+    const enrollmentDetails = progress?.certificateDetails || {};
+
+    const studentNameFromEnrollment = enrollmentDetails.fullName || user?.userName || user?.userEmail || String(studentId);
+    const studentEmailFromEnrollment = enrollmentDetails.email || user?.userEmail || undefined;
+    const studentFatherNameFromEnrollment = enrollmentDetails.fatherName || user?.guardianName || user?.guardianDetails || undefined;
+    const studentCollegeNameFromEnrollment = enrollmentDetails.collegeName || undefined;
+    const studentPhoneFromEnrollment = enrollmentDetails.phone || undefined;
+    const customStudentId = user?.studentId || undefined; // Custom student ID (NXL-STU-XXXX)
     const courseTitle = course?.certificateCourseName || course?.title || undefined;
+
+    // Generate unique certificate ID if not present
+    const certificateId = `NXL-CERT-${Date.now()}-${Math.random().toString(36).substr(2, 6).toUpperCase()}`;
 
     const doc = await CertificateApproval.findOneAndUpdate(
       { courseId, studentId },
@@ -26,9 +35,12 @@ const approveCertificate = async (req, res) => {
         approvedAt: new Date(), 
         revoked: false, 
         revokedAt: null,
-        studentName,
-        studentEmail,
-        studentFatherName,
+        certificateId,
+        studentName: studentNameFromEnrollment,
+        studentEmail: studentEmailFromEnrollment,
+        studentFatherName: studentFatherNameFromEnrollment,
+        studentCollegeName: studentCollegeNameFromEnrollment,
+        studentPhone: studentPhoneFromEnrollment,
         customStudentId,
         courseTitle,
       },
@@ -126,10 +138,10 @@ const bulkApproveCertificates = async (req, res) => {
 
     const validStudentIds = studentIds.filter(id => mongoose.Types.ObjectId.isValid(id));
     
-    // Fetch all users and course info in parallel
-    const [users, course] = await Promise.all([
+    const [users, course, allProgress] = await Promise.all([
       User.find({ _id: { $in: validStudentIds } }),
-      Course.findById(courseId)
+      Course.findById(courseId),
+      require("../../models/CourseProgress").find({ courseId, userId: { $in: validStudentIds } })
     ]);
 
     if (!course) {
@@ -138,6 +150,9 @@ const bulkApproveCertificates = async (req, res) => {
 
     const userMap = {};
     users.forEach(u => { userMap[u._id.toString()] = u; });
+
+    const progressMap = {};
+    allProgress.forEach(p => { progressMap[p.userId] = p; });
     
     const courseTitle = course.certificateCourseName || course.title || undefined;
 
@@ -146,10 +161,17 @@ const bulkApproveCertificates = async (req, res) => {
       const user = userMap[studentId];
       if (!user) return null;
 
-      const studentName = user.userName || user.userEmail || String(studentId);
-      const studentEmail = user.userEmail || undefined;
-      const studentFatherName = user.guardianName || user.guardianDetails || undefined;
+      const progress = progressMap[studentId];
+      const enrollmentDetails = progress?.certificateDetails || {};
+
+      const studentName = enrollmentDetails.fullName || user.userName || user.userEmail || String(studentId);
+      const studentEmail = enrollmentDetails.email || user.userEmail || undefined;
+      const studentFatherName = enrollmentDetails.fatherName || user.guardianName || user.guardianDetails || undefined;
+      const studentCollegeName = enrollmentDetails.collegeName || undefined;
+      const studentPhone = enrollmentDetails.phone || undefined;
       const customStudentId = user.studentId || undefined;
+      
+      const certificateId = `NXL-CERT-B-${Date.now()}-${Math.random().toString(36).substr(2, 4).toUpperCase()}`;
 
       return {
         updateOne: {
@@ -160,9 +182,12 @@ const bulkApproveCertificates = async (req, res) => {
               approvedAt: new Date(),
               revoked: false,
               revokedAt: null,
+              certificateId,
               studentName,
               studentEmail,
               studentFatherName,
+              studentCollegeName,
+              studentPhone,
               customStudentId,
               courseTitle,
             }

@@ -36,7 +36,7 @@ const verifyCertificate = async (req, res) => {
       require("../models/Order").findOne({ userId: approval.studentId, courseId: approval.courseId, paymentStatus: 'paid' }).sort({ createdAt: -1 })
     ]);
 
-    const certificateName = progress?.certificateDetails?.fullName || order?.certificateFullName || approval.studentName || student?.userName;
+    const certificateName = progress?.certificateDetails?.fullName || order?.certificateFullName || approval.studentName || student?.userName || "CERTIFIED STUDENT";
     const certificateFatherName = progress?.certificateDetails?.fatherName || order?.certificateFatherName || approval.studentFatherName;
     const certificateCollegeName = progress?.certificateDetails?.collegeName || order?.certificateCollegeName || approval.studentCollegeName;
 
