@@ -89,17 +89,16 @@ router.get(
     );
     
     // Redirect to frontend with token
+    const base = getFrontendBase();
     const mode = req.query.state || 'signin';
     if (mode === 'signup') {
-      const base = getFrontendBase();
       if (user.isNewUser) {
-        res.redirect(`${base}/auth/success?token=${token}&isNewUser=true`);
+        res.redirect(`${base}/oauth-success?token=${token}&isNewUser=true`);
       } else {
-        res.redirect(`${base}/auth/success?token=${token}&alreadyRegistered=true`);
+        res.redirect(`${base}/oauth-success?token=${token}&alreadyRegistered=true`);
       }
     } else {
-      const base = getFrontendBase();
-      res.redirect(`${base}/auth/success?token=${token}&isNewUser=false`);
+      res.redirect(`${base}/oauth-success?token=${token}&isNewUser=false`);
     }
   }
 );

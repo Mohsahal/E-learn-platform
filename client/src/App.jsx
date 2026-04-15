@@ -97,6 +97,9 @@ function App() {
             </PublicRouteGuard>
           }
         />
+        {/* OAuth success handler — backend redirects here after GitHub/Google login */}
+        <Route path="/oauth-success" element={<OAuthSuccess />} />
+        {/* Legacy alias kept for backward compatibility */}
         <Route path="/auth/success" element={<OAuthSuccess />} />
 
         {/* Unauthorized Route */}

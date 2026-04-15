@@ -3,10 +3,35 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { courseLandingPageFormControls } from "@/config";
 import { InstructorContext } from "@/context/instructor-context";
 import { useContext } from "react";
-import { BookOpen, Eye, Star, Zap } from "lucide-react";
+import { BookOpen, Eye, Star, Zap, Image as ImageIcon, Upload } from "lucide-react";
+import { SecureInstructorFileUpload } from "@/components/security/SecureInstructorForm";
+import { mediaUploadService } from "@/services";
+import { useState } from "react";
 
 function CourseLanding() {
-  const { courseLandingFormData, setCourseLandingFormData } = useContext(InstructorContext);
+  const { courseLandingFormData, setCourseLandingFormData, setMediaUploadProgress } = useContext(InstructorContext);
+  const [uploadError, setUploadError] = useState("");
+
+  async function handleImageUploadChange(files) {
+    if (!files || files.length === 0) return;
+    const selectedImage = files[0];
+    setUploadError("");
+    const imageFormData = new FormData();
+    imageFormData.append("file", selectedImage);
+    try {
+      setMediaUploadProgress(true);
+      const response = await mediaUploadService(imageFormData, () => {});
+      if (response.success) {
+        setCourseLandingFormData({ ...courseLandingFormData, image: response.data.secure_url || response.data.url });
+      } else {
+        setUploadError("Failed to upload image");
+      }
+    } catch {
+      setUploadError("Upload failed. Please try again.");
+    } finally {
+      setMediaUploadProgress(false);
+    }
+  }
 
   return (
     <div className="space-y-5">
@@ -43,17 +68,36 @@ function CourseLanding() {
                 </h3>
 
                 {/* Course Image */}
-                <div className="w-full h-44 bg-white/5 rounded-xl mb-4 flex items-center justify-center overflow-hidden border border-white/5">
+                <div className="w-full h-44 bg-white/5 rounded-xl mb-4 flex items-center justify-center overflow-hidden border border-white/10 group relative">
                   {courseLandingFormData?.image ? (
-                    <img
-                      src={courseLandingFormData.image}
-                      alt="Course preview"
-                      className="w-full h-full object-cover"
-                    />
+                    <>
+                      <img
+                        src={courseLandingFormData.image}
+                        alt="Course preview"
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                         <SecureInstructorFileUpload
+                            onChange={handleImageUploadChange}
+                            accept="image/*"
+                            maxSize={5 * 1024 * 1024}
+                            label="Replace"
+                            description=""
+                            className="bg-blue-600 text-white px-4 py-2 rounded-lg text-xs font-bold"
+                          />
+                      </div>
+                    </>
                   ) : (
-                    <div className="text-center text-gray-600">
-                      <BookOpen className="w-10 h-10 mx-auto mb-2" />
-                      <p className="text-xs">Course image will appear here</p>
+                    <div className="text-center p-6 w-full h-full flex flex-col items-center justify-center">
+                      <SecureInstructorFileUpload
+                        onChange={handleImageUploadChange}
+                        accept="image/*"
+                        maxSize={5 * 1024 * 1024}
+                        label="Upload Image"
+                        description="Course thumbnail"
+                        className="border-none bg-transparent p-0"
+                      />
+                      {uploadError && <p className="text-red-500 text-[10px] mt-2">{uploadError}</p>}
                     </div>
                   )}
                 </div>

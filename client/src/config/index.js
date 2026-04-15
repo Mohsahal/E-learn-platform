@@ -133,7 +133,7 @@ export const courseLandingPageFormControls = [
     label: "Pricing",
     componentType: "input",
     type: "number",
-    placeholder: "Enter course pricing",
+    placeholder: "Enter course pricing (0 for free)",
   },
   {
     name: "objectives",
@@ -177,7 +177,7 @@ export const courseLandingInitialFormData = {
 
 export const courseCurriculumInitialFormData = [
   {
-    title: "",
+    title: "Introduction",
     videoUrl: "",
     freePreview: false,
     public_id: "",

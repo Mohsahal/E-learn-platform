@@ -38,29 +38,27 @@ function AddNewCoursePage() {
   }
 
   function validateFormData() {
-    const requiredFields = ["title", "category", "level", "primaryLanguage", "subtitle", "description", "pricing", "image", "duration"];
-    for (const key of requiredFields) {
+    // Basic fields that MUST be present to enable the button
+    const basicFields = ["title", "category", "level", "primaryLanguage", "description"];
+    
+    for (const key of basicFields) {
       const value = courseLandingFormData[key];
       if (isEmpty(value) || (typeof value === "string" && value.trim() === "")) return false;
     }
-    if (courseLandingFormData?.certificateEnabled) {
-      const certName  = courseLandingFormData?.certificateCourseName;
-      const certGrade = courseLandingFormData?.defaultCertificateGrade;
-      if (isEmpty(certName) || (typeof certName === "string" && certName.trim() === "") ||
-          isEmpty(certGrade) || (typeof certGrade === "string" && certGrade.trim() === "")) return false;
+
+    // Pricing check - just ensure it's a valid number if provided
+    if (courseLandingFormData.pricing !== "" && courseLandingFormData.pricing !== null) {
+      const priceNum = Number(courseLandingFormData.pricing);
+      if (isNaN(priceNum) || priceNum < 0) return false;
     }
-    const priceNum = Number(courseLandingFormData.pricing);
-    if (!Number.isFinite(priceNum) || priceNum <= 0) return false;
+
+    // Curriculum check - Every item MUST have a title
     if (!Array.isArray(courseCurriculumFormData) || courseCurriculumFormData.length === 0) return false;
-    let hasFreePreview = false;
+    
     for (const item of courseCurriculumFormData) {
       if (isEmpty(item?.title) || String(item.title).trim() === "") return false;
-      if (item?.freePreview) hasFreePreview = true;
     }
-    if (currentEditedCourseId === null) {
-      const hasAnyVideo = courseCurriculumFormData.some((i) => !isEmpty(i?.videoUrl) && !isEmpty(i?.public_id));
-      return hasFreePreview && hasAnyVideo;
-    }
+
     return true;
   }
 
