@@ -30,14 +30,15 @@ const verifyCertificate = async (req, res) => {
     const course = await Course.findById(approval.courseId);
     
     // Get student details (optional - only public info)
-    const [student, progress] = await Promise.all([
+    const [student, progress, order] = await Promise.all([
       User.findById(approval.studentId).select('userName userEmail studentId'),
-      require("../models/CourseProgress").findOne({ userId: approval.studentId, courseId: approval.courseId })
+      require("../models/CourseProgress").findOne({ userId: approval.studentId, courseId: approval.courseId }),
+      require("../models/Order").findOne({ userId: approval.studentId, courseId: approval.courseId, paymentStatus: 'paid' }).sort({ createdAt: -1 })
     ]);
 
-    const certificateName = progress?.certificateDetails?.fullName || approval.studentName || student?.userName;
-    const certificateFatherName = progress?.certificateDetails?.fatherName || approval.studentFatherName;
-    const certificateCollegeName = progress?.certificateDetails?.collegeName || approval.studentCollegeName;
+    const certificateName = progress?.certificateDetails?.fullName || order?.certificateFullName || approval.studentName || student?.userName;
+    const certificateFatherName = progress?.certificateDetails?.fatherName || order?.certificateFatherName || approval.studentFatherName;
+    const certificateCollegeName = progress?.certificateDetails?.collegeName || order?.certificateCollegeName || approval.studentCollegeName;
 
     // Return verification data
     return res.status(200).json({
