@@ -4,21 +4,17 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
-  ArrowLeft,
   Award,
   BookOpen,
   CalendarDays,
   Fingerprint,
-  Loader2,
-  Mail,
   Shield,
   ShieldCheck,
-  User,
   XCircle,
   Zap,
-  ChevronRight,
-  ExternalLink
+  ChevronRight
 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import axiosInstance from "@/api/axiosInstance";
 import TextLogo from "@/components/common/text-logo";
 
@@ -67,245 +63,227 @@ export default function CertificateVerificationPage() {
 
   if (loading) {
     return (
-      <div className="relative min-h-screen flex items-center justify-center p-6 overflow-hidden" style={{ background: "var(--bg-dark)" }}>
+      <div className="relative min-h-screen flex items-center justify-center p-6 overflow-hidden bg-[#050505]">
         <div className="absolute inset-0 grid-bg opacity-[0.05]" />
-        <div className="relative z-10 w-full max-w-md">
-          <div className="flex justify-center mb-8">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="relative z-10 w-full max-w-md"
+        >
+          <div className="flex justify-center mb-12">
             <TextLogo />
           </div>
-          <Card className="glass-card border-white/10 bg-white/[0.02]">
-            <CardContent className="py-16 flex flex-col items-center space-y-8">
+          <Card className="glass-card border-white/5 bg-white/[0.01] backdrop-blur-xl">
+            <CardContent className="py-20 flex flex-col items-center space-y-10">
               <div className="relative">
-                <div className="w-24 h-24 rounded-full border-4 border-blue-500/10 border-t-blue-500 animate-spin" />
+                <motion.div 
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                  className="w-24 h-24 rounded-full border-t-2 border-r-2 border-blue-500"
+                />
                 <span className="absolute inset-0 flex items-center justify-center">
-                  <Shield className="w-8 h-8 text-blue-400" />
+                  <Shield className="w-10 h-10 text-blue-400/50" />
                 </span>
-                <div className="absolute -inset-4 bg-blue-500/10 blur-2xl rounded-full" />
+                <div className="absolute -inset-8 bg-blue-500/10 blur-3xl rounded-full" />
               </div>
-              <div className="text-center space-y-3">
-                <h3 className="text-xl font-black text-white uppercase italic tracking-tighter">Verifying Credentials</h3>
-                <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">
-                  Establishing secure nexus with accreditation ledger...
-                </p>
+              <div className="text-center space-y-4">
+                <h3 className="text-2xl font-black text-white uppercase tracking-tighter italic">Authenticating...</h3>
+                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.3em]">Secure verification in progress</p>
               </div>
             </CardContent>
           </Card>
-        </div>
+        </motion.div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="relative min-h-screen flex items-center justify-center p-6 overflow-hidden" style={{ background: "var(--bg-dark)" }}>
-        <div className="absolute inset-0 grid-bg opacity-[0.05]" />
-        <div className="relative z-10 w-full max-w-lg animate-in zoom-in-95 duration-500">
-          <div className="flex justify-center mb-8">
+      <div className="relative min-h-screen flex items-center justify-center p-6 bg-[#050505]">
+        <div className="absolute inset-0 grid-bg opacity-[1.05]" />
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="relative z-10 w-full max-w-lg"
+        >
+          <div className="flex justify-center mb-10">
             <TextLogo />
           </div>
-          <Card className="glass-card border-red-500/20 bg-red-500/[0.02]">
-            <CardHeader className="flex flex-col items-center text-center space-y-4 pt-8 sm:pt-12 px-4">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl sm:rounded-3xl bg-red-500/10 flex items-center justify-center border border-red-500/20 shadow-[0_0_30px_rgba(239,68,68,0.2)]">
-                <XCircle className="w-8 h-8 sm:w-10 sm:h-10 text-red-400" />
+          <Card className="glass-card border-red-500/10 bg-red-500/[0.01]">
+            <CardHeader className="flex flex-col items-center text-center space-y-6 pt-12">
+              <div className="w-24 h-24 rounded-full bg-red-500/5 flex items-center justify-center border border-red-500/10">
+                <XCircle className="w-12 h-12 text-red-400" />
               </div>
-              <div className="space-y-2 text-center">
-                <CardTitle className="text-2xl sm:text-4xl font-black text-white italic tracking-tighter uppercase leading-none">Signal Lost</CardTitle>
-                <p className="text-red-400/70 font-black uppercase text-[10px] tracking-widest leading-relaxed px-4">
-                   Credential Identifier not found in active registry.
+              <div className="space-y-3">
+                <CardTitle className="text-4xl font-black text-white italic tracking-tighter uppercase">Invalid Credential</CardTitle>
+                <p className="text-red-400/60 font-black uppercase text-[10px] tracking-widest leading-relaxed">
+                   The provided certificate identifier could not be verified.
                 </p>
               </div>
             </CardHeader>
-            <CardContent className="space-y-6 sm:space-y-8 p-6 sm:p-8">
-              <div className="rounded-2xl border border-white/5 bg-white/[0.01] p-4 sm:p-5">
-                <p className="text-[10px] sm:text-xs font-medium text-gray-500 leading-relaxed italic text-center">
-                  "Please confirm the certificate ID exactly as printed. If the issue persists, 
-                  contact the administrative attache for manual verification."
-                </p>
-              </div>
+            <CardContent className="p-8 space-y-8">
               <Button
                 onClick={() => navigate("/")}
-                className="w-full bg-white text-black hover:bg-gray-200 h-12 sm:h-14 rounded-2xl font-black uppercase tracking-widest text-[9px] sm:text-[10px] transition-all hover:scale-105 active:scale-95 shadow-xl shadow-white/5"
+                className="w-full bg-white text-black hover:bg-gray-200 h-14 rounded-2xl font-black uppercase tracking-widest text-[10px]"
               >
-                <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4 mr-2 sm:mr-3" />
-                Abort & Return
+                Return to Safety
               </Button>
             </CardContent>
           </Card>
-        </div>
+        </motion.div>
       </div>
     );
   }
 
   return (
-    <div className="relative min-h-screen text-gray-200 overflow-hidden" style={{ background: "var(--bg-dark)" }}>
-      {/* Background Decor */}
+    <div className="relative min-h-screen bg-[#050505] text-gray-200 overflow-x-hidden selection:bg-blue-500/30">
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-purple-600/5 rounded-full blur-[100px]" />
-        <div className="absolute inset-0 grid-bg opacity-[0.05]" />
+        <div className="absolute top-0 right-1/4 w-[800px] h-[800px] bg-blue-600/5 rounded-full blur-[150px]" />
+        <div className="absolute bottom-0 left-1/4 w-[600px] h-[600px] bg-purple-600/5 rounded-full blur-[120px]" />
       </div>
 
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-16 space-y-8 sm:space-y-12 animate-in fade-in duration-1000">
-          {/* Header Branding */}
-          <div className="flex justify-center md:justify-start mb-4">
-            <TextLogo />
-          </div>
-        {/* Verification Hero Card */}
-        <div className="grid gap-6 sm:gap-10 lg:grid-cols-5">
-          <Card className="lg:col-span-3 glass-card border-white/10 bg-white/[0.02] overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-emerald-500 to-transparent" />
-            <CardHeader className="p-6 sm:p-10 flex flex-col gap-5 sm:gap-6">
-              <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 sm:gap-6">
-                <div className="w-20 h-20 rounded-3xl bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 shadow-[0_0_30px_rgba(16,185,129,0.2)]">
-                  <ShieldCheck className="w-10 h-10 sm:w-12 sm:h-12 text-emerald-400" />
-                </div>
-                <div className="space-y-2">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/5 border border-emerald-500/20 text-emerald-400">
-                     <Zap className="w-2.5 h-2.5" />
-                     <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em] leading-none">Security Verified</span>
-                  </div>
-                  <CardTitle className="text-2xl sm:text-4xl font-black text-white italic tracking-tighter uppercase leading-[1.1]">Protocol Confirmed</CardTitle>
-                </div>
-              </div>
-              <p className="text-sm sm:text-base text-gray-400 font-medium leading-relaxed max-w-2xl text-center sm:text-left">
-                This academic credential has been successfully validated against the secure ledgers of 
-                <span className="text-white font-black italic"> Nexora Learn</span>.
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 py-12 sm:py-24 space-y-12">
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex flex-col md:flex-row items-center justify-between gap-8 border-b border-white/5 pb-10"
+        >
+          <TextLogo />
+          <div className="flex items-center gap-6">
+            <div className="hidden sm:block text-right">
+              <p className="text-[10px] font-black text-emerald-400 uppercase tracking-widest flex items-center justify-end gap-2">
+                <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                Live Verification Active
               </p>
-            </CardHeader>
-            <CardContent className="p-6 sm:p-10 pt-0 space-y-6 sm:space-y-8">
-              <div className="grid gap-4 sm:grid-cols-2">
-                <StatusTile
-                  icon={ShieldCheck}
-                  label="Network Status"
-                  value={verification?.revoked ? "REVOKED" : "ACTIVE / AUTHENTIC"}
-                  accent={verification?.revoked ? "text-red-500" : "text-emerald-400"}
-                />
-                <StatusTile
-                  icon={Award}
-                  label="Credential ID"
-                  value={verification?.certificateId}
-                  accent="text-blue-400"
-                />
-              </div>
-
-              <div className="grid gap-6 md:grid-cols-1 pt-6 border-t border-white/5">
-                <div className="rounded-2xl border border-white/5 bg-white/[0.01] p-8 text-center space-y-4">
-                  <p className="text-[10px] font-black text-blue-400 uppercase tracking-[0.3em]">Certified Professional</p>
-                  <h3 className="text-3xl sm:text-5xl font-black text-white italic tracking-tighter uppercase">{verification?.studentName}</h3>
-                  <div className="w-20 h-1 bg-blue-500/30 mx-auto rounded-full" />
-                </div>
-
-                <div className="grid gap-4 sm:grid-cols-2 mt-4">
-                  <InfoTile
-                    icon={Award}
-                    label="Certificate ID"
-                    value={verification?.certificateId}
-                  />
-                   <InfoTile
-                    icon={CalendarDays}
-                    label="Date of Issuance"
-                    value={issueDate ? new Date(issueDate).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }) : "N/A"}
-                  />
-                  <InfoTile
-                    icon={BookOpen}
-                    label="Course Completed"
-                    value={verification?.courseTitle}
-                    highlight={verification?.grade ? `Final Grade: ${verification.grade}` : null}
-                  />
-                  <InfoTile
-                    icon={ShieldCheck}
-                    label="Verification Status"
-                    value={verification?.revoked ? "REVOKED" : "VERIFIED & AUTHENTIC"}
-                    accent={verification?.revoked ? "text-red-500" : "text-emerald-400"}
-                  />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Metadata Sidebar */}
-          <Card className="lg:col-span-2 glass-card border-white/5 bg-white/[0.01]">
-            <CardHeader className="p-6 sm:p-8 border-b border-white/5">
-              <CardTitle className="text-xs sm:text-sm font-black text-white uppercase tracking-[0.2em] sm:tracking-[0.3em] flex items-center gap-3">
-                 <Fingerprint className="w-4 h-4 text-purple-400" />
-                 Metadata Archive
-              </CardTitle>
-              <p className="text-[9px] sm:text-[10px] font-bold text-gray-600 uppercase tracking-widest mt-2">
-                Immutable record logs since issuance.
-              </p>
-            </CardHeader>
-            <CardContent className="p-6 sm:p-8 space-y-4 sm:space-y-6">
-              <MetaRow
-                icon={Fingerprint}
-                label="Student ID Ref"
-                value={verification?.customStudentId || verification?.studentId || "UNASSIGNED"}
-              />
-              <MetaRow
-                icon={CalendarDays}
-                label="Timestamp"
-                value={
-                  issueDate
-                    ? new Date(issueDate).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })
-                    : "UNKNOWN"
-                }
-              />
-              <MetaRow
-                icon={Shield}
-                label="Issuing Node"
-                value={verification?.issuedBy || "NEXORA_LEARN_CORE"}
-              />
-              <div className="rounded-2xl border border-blue-500/10 bg-blue-500/5 p-5 space-y-3 mt-4 relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-16 h-16 bg-blue-500/5 blur-xl rounded-full -mr-8 -mt-8" />
-                <h5 className="text-[10px] font-black text-blue-400 uppercase tracking-widest flex items-center gap-2">
-                   <Zap className="w-3 h-3" /> Compliance Note
-                </h5>
-                <p className="text-[11px] text-gray-500 leading-relaxed font-bold uppercase tracking-tight">
-                  This record is secured via multi-layer cryptographic hashing. Any synchronization failure triggers persistent administrative alerts.
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Footer Actions */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8 pt-8 sm:pt-10 border-t border-white/5 px-4 sm:px-0">
-          <div className="space-y-2 text-center md:text-left">
-            <p className="text-[8px] sm:text-[10px] font-black uppercase tracking-[0.2em] sm:tracking-[0.3em] text-gray-600 italic">
-               © {new Date().getFullYear()} Nexora Learn. Integrity Persists.
-            </p>
-            <div className="flex items-center justify-center md:justify-start gap-4 text-[7px] sm:text-[9px] font-bold text-gray-700 uppercase tracking-widest">
-               <span>Secure Ledger #8829-X</span>
-               <div className="w-1 h-1 rounded-full bg-gray-800" />
-               <span>Compliance Verified</span>
+              <p className="text-[9px] text-gray-600 uppercase font-bold mt-1 tracking-tight">Sync ID: {certificateId?.slice(0, 12)}...</p>
             </div>
+            <div className="w-px h-10 bg-white/5 hidden sm:block" />
+            <ShieldCheck className="w-10 h-10 text-emerald-400/80" />
           </div>
-          <Button
-            onClick={() => navigate("/")}
-            variant="ghost"
-            className="w-full sm:w-auto border border-white/5 text-gray-500 hover:text-white hover:bg-white/5 h-12 sm:h-14 px-8 sm:px-10 rounded-2xl font-black uppercase tracking-widest text-[9px] sm:text-[10px] transition-all"
-          >
-            <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4 mr-2 sm:mr-3" />
-            Terminate Link
-          </Button>
-        </div>
-      </div>
-    </div>
-  );
-}
+        </motion.div>
 
-function StatusTile({ icon: Icon, label, value, accent }) {
-  return (
-    <div className="rounded-2xl border border-white/5 p-6 bg-white/[0.02] flex items-center gap-5 group hover:border-white/10 transition-colors">
-      <div className={`p-3 rounded-xl bg-white/5 border border-white/5 ${accent}`}>
-         <Icon className="w-8 h-8" />
-      </div>
-      <div>
-        <p className="text-[10px] font-black text-gray-600 uppercase tracking-[0.2em] mb-1">{label}</p>
-        <p className={`text-lg font-black uppercase tracking-tight italic ${accent}`}>{value}</p>
+        <div className="grid gap-8 lg:grid-cols-12">
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2 }}
+            className="lg:col-span-8 space-y-8"
+          >
+            <Card className="glass-card border-white/5 bg-white/[0.01] overflow-hidden relative group">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
+              <CardContent className="p-8 sm:p-12 space-y-12">
+                <div className="flex flex-col items-center text-center space-y-8">
+                  <div className="space-y-4">
+                    <motion.div 
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.4 }}
+                      className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400"
+                    >
+                       <Award className="w-3 h-3" />
+                       <span className="text-[10px] font-black uppercase tracking-widest leading-none">Verified Achievement</span>
+                    </motion.div>
+                    <h1 className="text-4xl sm:text-7xl font-black text-white italic tracking-tighter uppercase leading-[0.9]">
+                      {verification?.studentName}
+                    </h1>
+                    <p className="text-sm sm:text-lg text-gray-500 font-medium tracking-tight">
+                      Has successfully completed the prescribed track under the accreditation of <span className="text-white">Nexora Learn</span>
+                    </p>
+                  </div>
+
+                  <div className="grid gap-6 sm:grid-cols-2 w-full pt-8">
+                    <InfoTile
+                      icon={Award}
+                      label="Certificate ID"
+                      value={verification?.certificateId}
+                    />
+                     <InfoTile
+                      icon={CalendarDays}
+                      label="Issuance Date"
+                      value={issueDate ? new Date(issueDate).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }) : "N/A"}
+                    />
+                    <InfoTile
+                      icon={BookOpen}
+                      label="Technical Domain"
+                      value={verification?.courseTitle}
+                      highlight={verification?.grade ? `Performance Index: ${verification.grade}` : null}
+                    />
+                    <InfoTile
+                      icon={ShieldCheck}
+                      label="Verification State"
+                      value={verification?.revoked ? "REVOKED" : "AUTHENTIC"}
+                      accent={verification?.revoked ? "text-red-500" : "text-emerald-400"}
+                    />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3 }}
+            className="lg:col-span-4 space-y-6"
+          >
+            <Card className="glass-card border-white/5 bg-white/[0.01] h-full">
+              <CardHeader className="p-8 border-b border-white/5">
+                <CardTitle className="text-xs font-black text-white uppercase tracking-[0.3em] flex items-center gap-3">
+                   <Fingerprint className="w-4 h-4 text-blue-500" />
+                   Security Meta
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-8 space-y-6">
+                <MetaRow
+                  icon={Fingerprint}
+                  label="Registry ID"
+                  value={verification?.customStudentId || verification?.studentId || "UNASSIGNED"}
+                />
+                <MetaRow
+                  icon={Shield}
+                  label="Accreditation"
+                  value={verification?.issuedBy || "NEXORA_LEARN_CORE"}
+                />
+                <div className="rounded-3xl border border-blue-500/10 bg-blue-500/[0.02] p-6 space-y-4">
+                  <h5 className="text-[10px] font-black text-blue-400 uppercase tracking-widest flex items-center gap-2">
+                     <Zap className="w-3 h-3" /> Ledger Note
+                  </h5>
+                  <p className="text-[11px] text-gray-500 leading-relaxed font-bold uppercase tracking-tight italic">
+                    This digital credential utilizes cryptographic hashing to ensure absolute data integrity. Valid only when synchronized with live Nexora Learn registers.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </div>
+
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
+          className="flex flex-col sm:flex-row items-center justify-between gap-8 pt-12 border-t border-white/5"
+        >
+          <div className="space-y-1 text-center sm:text-left">
+            <p className="text-[10px] font-black uppercase tracking-widest text-gray-700 italic">
+               © {new Date().getFullYear()} Nexora Learn Global Accreditation.
+            </p>
+          </div>
+          <div className="flex items-center gap-4">
+            <Button
+              onClick={() => window.print()}
+              variant="outline"
+              className="border-white/5 text-gray-500 hover:bg-white/5 h-12 px-8 rounded-2xl font-black uppercase tracking-widest text-[9px]"
+            >
+              Export Report
+            </Button>
+            <Button
+              onClick={() => navigate("/")}
+              className="bg-white text-black hover:bg-gray-200 h-12 px-8 rounded-2xl font-black uppercase tracking-widest text-[9px]"
+            >
+              Close Link
+            </Button>
+          </div>
+        </motion.div>
       </div>
     </div>
   );
@@ -314,16 +292,16 @@ function StatusTile({ icon: Icon, label, value, accent }) {
 function InfoTile({ icon: Icon, label, value, highlight }) {
   if (!value) return null;
   return (
-    <div className="rounded-2xl border border-white/5 bg-white/[0.01] p-6 space-y-3 group hover:bg-white/[0.02] transition-colors">
-      <div className="flex items-center gap-3 text-[10px] font-black text-gray-500 uppercase tracking-widest">
-        <Icon className="w-3.5 h-3.5 text-blue-500/60" />
+    <div className="rounded-3xl border border-white/5 bg-white/[0.015] p-8 space-y-4 hover:bg-white/[0.025] transition-all duration-300">
+      <div className="flex items-center gap-3 text-[10px] font-black text-gray-600 uppercase tracking-[0.2em]">
+        <Icon className="w-4 h-4 text-blue-500/80" />
         <span>{label}</span>
       </div>
       <div className="space-y-1">
-         <p className="text-xl font-black text-white italic tracking-tight">{value}</p>
+         <p className="text-xl font-black text-white italic tracking-tight uppercase">{value}</p>
          {highlight && (
-           <p className="text-[10px] font-bold text-gray-600 uppercase tracking-widest flex items-center gap-2">
-              <ChevronRight className="w-3 h-3 text-purple-500" />
+           <p className="text-[10px] font-bold text-gray-700 uppercase tracking-widest flex items-center gap-2">
+              <ChevronRight className="w-3 h-3 text-blue-500/40" />
               {highlight}
            </p>
          )}
@@ -334,24 +312,17 @@ function InfoTile({ icon: Icon, label, value, highlight }) {
 
 function MetaRow({ icon: Icon, label, value }) {
   return (
-    <div className="flex items-center gap-4 border border-white/5 rounded-2xl p-4 bg-white/[0.02] group hover:border-white/10 transition-colors">
-      <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center border border-white/5 group-hover:scale-110 transition-transform">
-        <Icon className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
+    <div className="flex items-center gap-5 border border-white/5 rounded-3xl p-5 bg-white/[0.02] group transition-all duration-300 hover:border-white/10">
+      <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center border border-white/5 group-hover:bg-blue-500/10 transition-colors">
+        <Icon className="w-5 h-5 text-gray-500 group-hover:text-blue-400 transition-colors" />
       </div>
       <div>
-        <p className="text-[10px] font-black uppercase tracking-widest text-gray-600 mb-0.5">{label}</p>
+        <p className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-700 mb-1">{label}</p>
         <p className="text-xs font-bold text-gray-400 uppercase tracking-tight group-hover:text-white transition-colors">{value}</p>
       </div>
     </div>
   );
 }
-
-StatusTile.propTypes = {
-  icon: PropTypes.elementType.isRequired,
-  label: PropTypes.string.isRequired,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
-  accent: PropTypes.string,
-};
 
 InfoTile.propTypes = {
   icon: PropTypes.elementType.isRequired,

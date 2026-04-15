@@ -58,7 +58,7 @@ Message:
 ${displayMessage}
 
 ---
-This email was sent from the Astra Learning contact form.
+This email was sent from the Nexora Learn contact form.
     `.trim();
 
     const emailHtml = `
@@ -78,16 +78,16 @@ This email was sent from the Astra Learning contact form.
           <p style="white-space: pre-wrap;">${displayMessage.replace(/\n/g, '<br/>')}</p>
         </div>
         <p style="text-align: center; color: #666; font-size: 12px; margin-top: 30px;">
-          This email was sent from the Astra Learning contact form.
+          This email was sent from the Nexora Learn contact form.
         </p>
       </div>
     `;
 
     const emailData = {
-      from: `Astra Learning <${FROM_EMAIL}>`,
+      from: `Nexora Learn <${FROM_EMAIL}>`,
       to: [ADMIN_EMAIL],
       reply_to: displayEmail !== 'Not provided' ? displayEmail : undefined,
-      subject: subject || "New Contact Form Submission - Astra Learning",
+      subject: subject || "New Contact Form Submission - Nexora Learn",
       html: emailHtml,
       text: emailText
     };
@@ -136,7 +136,7 @@ async function sendOTPEmail({ email, otp }) {
     const emailHtml = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
         <div style="text-align: center; margin-bottom: 30px;">
-          <h1 style="color: #333; margin: 0;">Astra Learning</h1>
+          <h1 style="color: #333; margin: 0;">Nexora Learn</h1>
         </div>
         
         <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 10px; text-align: center; color: white;">
@@ -160,17 +160,17 @@ async function sendOTPEmail({ email, otp }) {
         
         <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
           <p style="color: #999; font-size: 12px; margin: 0;">
-            This is an automated email from Astra Learning LMS Platform
+            This is an automated email from Nexora Learn LMS Platform
           </p>
           <p style="color: #999; font-size: 12px; margin: 5px 0 0 0;">
-            © ${new Date().getFullYear()} Astra Learning. All rights reserved.
+            © ${new Date().getFullYear()} Nexora Learn. All rights reserved.
           </p>
         </div>
       </div>
     `;
 
     const emailText = `
-Astra Learning - Password Reset
+Nexora Learn - Password Reset
 
 Your OTP for password reset is: ${otp}
 
@@ -179,13 +179,13 @@ This OTP will expire in 10 minutes.
 If you didn't request this password reset, please ignore this email.
 
 ---
-This is an automated email from Astra Learning LMS Platform
+This is an automated email from Nexora Learn LMS Platform
     `.trim();
 
     const emailData = {
-      from: `Astra Learning <${FROM_EMAIL}>`,
+      from: `Nexora Learn <${FROM_EMAIL}>`,
       to: [email],
-      subject: "Password Reset OTP - Astra Learning",
+      subject: "Password Reset OTP - Nexora Learn",
       html: emailHtml,
       text: emailText
     };

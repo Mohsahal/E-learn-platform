@@ -30,7 +30,14 @@ const verifyCertificate = async (req, res) => {
     const course = await Course.findById(approval.courseId);
     
     // Get student details (optional - only public info)
-    const student = await User.findById(approval.studentId).select('userName userEmail studentId');
+    const [student, progress] = await Promise.all([
+      User.findById(approval.studentId).select('userName userEmail studentId'),
+      require("../models/CourseProgress").findOne({ userId: approval.studentId, courseId: approval.courseId })
+    ]);
+
+    const certificateName = progress?.certificateDetails?.fullName || approval.studentName || student?.userName;
+    const certificateFatherName = progress?.certificateDetails?.fatherName || approval.studentFatherName;
+    const certificateCollegeName = progress?.certificateDetails?.collegeName || approval.studentCollegeName;
 
     // Return verification data
     return res.status(200).json({
@@ -38,9 +45,9 @@ const verifyCertificate = async (req, res) => {
       data: {
         certificateId: approval.certificateId,
         studentId: approval.customStudentId || student?.studentId, // Custom student ID (NXL-STU-XXXX)
-        studentName: approval.studentName || student?.userName,
-        studentFatherName: approval.studentFatherName,
-        studentCollegeName: approval.studentCollegeName,
+        studentName: certificateName,
+        studentFatherName: certificateFatherName,
+        studentCollegeName: certificateCollegeName,
         courseTitle: approval.courseTitle || course?.title,
         grade: approval.grade,
         issueDate: approval.approvedAt || approval.createdAt,
