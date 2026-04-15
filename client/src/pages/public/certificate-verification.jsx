@@ -188,19 +188,37 @@ export default function CertificateVerificationPage() {
                 />
               </div>
 
-              <div className="grid gap-4 md:grid-cols-2 pt-6 border-t border-white/5">
-                <InfoTile
-                  icon={Shield}
-                  label="Institutional Affiliation"
-                  value={verification?.studentCollegeName || "Verified Professional"}
-                  highlight={verification?.studentId ? `NODE_REF: ${verification.studentId}` : null}
-                />
-                <InfoTile
-                  icon={BookOpen}
-                  label="Track Domain"
-                  value={verification?.courseTitle}
-                  highlight={verification?.grade ? `Performance Index: ${verification.grade}` : null}
-                />
+              <div className="grid gap-6 md:grid-cols-1 pt-6 border-t border-white/5">
+                <div className="rounded-2xl border border-white/5 bg-white/[0.01] p-8 text-center space-y-4">
+                  <p className="text-[10px] font-black text-blue-400 uppercase tracking-[0.3em]">Certified Professional</p>
+                  <h3 className="text-3xl sm:text-5xl font-black text-white italic tracking-tighter uppercase">{verification?.studentName}</h3>
+                  <div className="w-20 h-1 bg-blue-500/30 mx-auto rounded-full" />
+                </div>
+
+                <div className="grid gap-4 sm:grid-cols-2 mt-4">
+                  <InfoTile
+                    icon={Award}
+                    label="Certificate ID"
+                    value={verification?.certificateId}
+                  />
+                   <InfoTile
+                    icon={CalendarDays}
+                    label="Date of Issuance"
+                    value={issueDate ? new Date(issueDate).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }) : "N/A"}
+                  />
+                  <InfoTile
+                    icon={BookOpen}
+                    label="Course Completed"
+                    value={verification?.courseTitle}
+                    highlight={verification?.grade ? `Final Grade: ${verification.grade}` : null}
+                  />
+                  <InfoTile
+                    icon={ShieldCheck}
+                    label="Verification Status"
+                    value={verification?.revoked ? "REVOKED" : "VERIFIED & AUTHENTIC"}
+                    accent={verification?.revoked ? "text-red-500" : "text-emerald-400"}
+                  />
+                </div>
               </div>
             </CardContent>
           </Card>
