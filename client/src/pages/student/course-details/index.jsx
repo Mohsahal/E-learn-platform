@@ -124,18 +124,21 @@ function StudentViewCourseDetailsPage() {
     setEnrollmentFormData({
       certificateFullName: auth?.user?.userName || "",
       certificateEmail: auth?.user?.userEmail || "",
-      certificateOrganization: "",
+      certificatePhone: "",
+      certificateFatherName: "",
+      certificateCollegeName: "",
       certificateCountry: "",
     });
   }
 
   function isEnrollmentFormValid() {
-    const fullName = enrollmentFormData?.certificateFullName?.trim() || "";
-    const email = enrollmentFormData?.certificateEmail?.trim() || "";
-
     return (
-      fullName !== "" &&
-      email !== ""
+      enrollmentFormData?.certificateFullName?.trim() !== "" &&
+      enrollmentFormData?.certificateEmail?.trim() !== "" &&
+      enrollmentFormData?.certificatePhone?.trim() !== "" &&
+      enrollmentFormData?.certificateFatherName?.trim() !== "" &&
+      enrollmentFormData?.certificateCollegeName?.trim() !== "" &&
+      enrollmentFormData?.certificateCountry?.trim() !== ""
     );
   }
 

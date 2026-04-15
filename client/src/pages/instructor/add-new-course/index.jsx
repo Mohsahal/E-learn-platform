@@ -38,25 +38,29 @@ function AddNewCoursePage() {
   }
 
   function validateFormData() {
-    // Basic fields that MUST be present to enable the button
-    const basicFields = ["title", "category", "level", "primaryLanguage", "description"];
+    // All landing page fields must be filled
+    const requiredLandingFields = [
+      "title", "category", "level", "primaryLanguage", 
+      "subtitle", "description", "pricing", "objectives", 
+      "welcomeMessage", "image"
+    ];
     
-    for (const key of basicFields) {
+    for (const key of requiredLandingFields) {
       const value = courseLandingFormData[key];
       if (isEmpty(value) || (typeof value === "string" && value.trim() === "")) return false;
     }
 
-    // Pricing check - just ensure it's a valid number if provided
-    if (courseLandingFormData.pricing !== "" && courseLandingFormData.pricing !== null) {
-      const priceNum = Number(courseLandingFormData.pricing);
-      if (isNaN(priceNum) || priceNum < 0) return false;
-    }
+    // Pricing must be a valid number (0 or positive)
+    const priceNum = Number(courseLandingFormData.pricing);
+    if (isNaN(priceNum) || priceNum < 0) return false;
 
-    // Curriculum check - Every item MUST have a title
+    // Curriculum check
     if (!Array.isArray(courseCurriculumFormData) || courseCurriculumFormData.length === 0) return false;
     
     for (const item of courseCurriculumFormData) {
+      // Every lecture must have a title and a video
       if (isEmpty(item?.title) || String(item.title).trim() === "") return false;
+      if (isEmpty(item?.videoUrl) || isEmpty(item?.public_id)) return false;
     }
 
     return true;

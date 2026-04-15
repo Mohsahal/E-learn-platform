@@ -177,7 +177,7 @@ export const courseLandingInitialFormData = {
 
 export const courseCurriculumInitialFormData = [
   {
-    title: "Introduction",
+    title: "",
     videoUrl: "",
     freePreview: false,
     public_id: "",
@@ -212,11 +212,41 @@ export const enrollmentFormControls = [
     type: "email",
     componentType: "input",
   },
+  {
+    name: "certificatePhone",
+    label: "WhatsApp/Mobile Number",
+    placeholder: "Enter with country code (e.g., +91...)",
+    type: "text",
+    componentType: "input",
+  },
+  {
+    name: "certificateFatherName",
+    label: "Father's Name",
+    placeholder: "Required for certificate",
+    type: "text",
+    componentType: "input",
+  },
+  {
+    name: "certificateCollegeName",
+    label: "College / Institution Name",
+    placeholder: "Enter your college/company name",
+    type: "text",
+    componentType: "input",
+  },
+  {
+    name: "certificateCountry",
+    label: "Country / Region",
+    placeholder: "Enter your current location",
+    type: "text",
+    componentType: "input",
+  },
 ];
 
 export const initialEnrollmentFormData = {
   certificateFullName: "",
   certificateEmail: "",
-  certificateOrganization: "",
+  certificatePhone: "",
+  certificateFatherName: "",
+  certificateCollegeName: "",
   certificateCountry: "",
 };

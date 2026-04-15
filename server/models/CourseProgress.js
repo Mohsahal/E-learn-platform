@@ -16,7 +16,11 @@ const CourseProgressSchema = new mongoose.Schema({
   certificateDetails: {
     fullName: String,
     guardianName: String,
+    fatherName: String,
+    collegeName: String,
     email: String,
+    phone: String,
+    country: String,
   },
 });
 

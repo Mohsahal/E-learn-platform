@@ -32,8 +32,10 @@ const OrderSchema = new mongoose.Schema(
     // Certificate details collected during enrollment
     certificateFullName: String,
     certificateGuardianName: String,
+    certificateFatherName: String,
     certificateEmail: String,
-    certificateOrganization: String,
+    certificatePhone: String,
+    certificateCollegeName: String,
     certificateCountry: String,
   },
   { timestamps: true }

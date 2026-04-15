@@ -31,7 +31,7 @@ const getAllStudentViewCourses = async (req, res) => {
       return res.status(200).json(JSON.parse(cachedData));
     }
 
-    let filters = {};
+    let filters = { isPublised: true };
     if (category.length) {
       filters.category = { $in: category.split(",") };
     }

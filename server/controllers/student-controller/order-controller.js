@@ -79,8 +79,10 @@ async function enrollStudentAfterPayment(order) {
           // 🎯 STICK TO ENROLLMENT FORM DATA ONLY as requested
           fullName: order.certificateFullName || "", 
           guardianName: order.certificateGuardianName || "",
+          fatherName: order.certificateFatherName || "",
+          collegeName: order.certificateCollegeName || "",
           email: order.certificateEmail || "",
-          organization: order.certificateOrganization || "",
+          phone: order.certificatePhone || "",
           country: order.certificateCountry || "",
         }
       },
@@ -150,8 +152,10 @@ const createOrder = async (req, res) => {
       isTestMode,
       certificateFullName,
       certificateGuardianName,
+      certificateFatherName,
       certificateEmail,
-      certificateOrganization,
+      certificatePhone,
+      certificateCollegeName,
       certificateCountry,
     } = req.body;
 
@@ -190,8 +194,10 @@ const createOrder = async (req, res) => {
             // 🎯 STICK TO ENROLLMENT FORM DATA ONLY as requested
             fullName: certificateFullName || "",
             guardianName: certificateGuardianName || "",
+            fatherName: certificateFatherName || "",
+            collegeName: certificateCollegeName || "",
             email: certificateEmail || "",
-            organization: certificateOrganization || "",
+            phone: certificatePhone || "",
             country: certificateCountry || "",
           }
         },
@@ -233,8 +239,10 @@ const createOrder = async (req, res) => {
           coursePricing,
           certificateFullName,
           certificateGuardianName,
+          certificateFatherName,
           certificateEmail,
-          certificateOrganization,
+          certificatePhone,
+          certificateCollegeName,
           certificateCountry,
         });
         await newOrder.save();
