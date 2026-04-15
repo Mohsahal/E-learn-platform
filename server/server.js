@@ -209,23 +209,41 @@ app.use(passport.initialize());
 // ----------------- Rate limiting -----------------
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: process.env.NODE_ENV === "production" ? 300 : 500,
+  max: process.env.NODE_ENV === "production" ? 500 : 1000, // Increased for auth peaks
   standardHeaders: true,
   legacyHeaders: false,
   validate: { default: false },
-  skip: req => req.path === "/csrf-token" ||
-    process.env.NODE_ENV !== "production",
+  skip: req => {
+    // Completely skip in non-production
+    if (process.env.NODE_ENV !== "production") return true;
+    // Skip internal/health routes
+    if (req.path === "/csrf-token" || req.path === "/health") return true;
+    // Skip OAUTH callbacks to avoid redirect blocking
+    if (req.path.includes("/github/callback") || req.path.includes("/google/callback")) return true;
+    return false;
+  },
   store: process.env.NODE_ENV === "production"
     ? new RedisStore({
         sendCommand: (...args) => redisClient.call(...args),
         prefix: 'rl:auth:',
       })
-    : undefined, // Memory store in dev
+    : undefined,
 });
 
 app.use("/auth", authLimiter);
 app.use((req, res, next) => {
-  if (req.path === "/csrf-token" || req.path === "/health") return next();
+  // Skip general limiting for paths that have their own limiters or are internal
+  const skipGeneral = [
+    "/csrf-token", 
+    "/health", 
+    "/auth/", 
+    "/media/", // Large uploads/downloads shouldn't be limited by request count strictly
+  ];
+  
+  if (skipGeneral.some(prefix => req.path.startsWith(prefix))) {
+    return next();
+  }
+  
   return generalApiLimiter(req, res, next);
 });
 
