@@ -228,9 +228,7 @@ app.use((req, res, next) => {
   return generalApiLimiter(req, res, next);
 });
 
-// health and csrf-token routes
-app.get("/health", (req, res) => res.status(200).json({ success: true, status: "OK", maintenance: false }));
-
+// CSRF-token route
 app.get("/csrf-token", (req, res) => {
   res.json({ success: true, csrfToken: "NexoraSecuredModeEnabled" });
 });
