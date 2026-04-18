@@ -527,7 +527,7 @@ function StudentViewCourseProgressPage() {
         <aside
           className={`fixed right-0 top-0 h-full bg-[#0a0f1e]/95 backdrop-blur-2xl border-l border-white/5 shadow-3xl transform ${
             isSideBarOpen ? "translate-x-0" : "translate-x-full"
-          } transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] z-40 w-full sm:w-[360px] lg:w-[400px] flex flex-col pt-16 sm:pt-20`}
+          } transition-transform duration-500 [transition-timing-function:cubic-bezier(0.23,1,0.32,1)] z-40 w-full sm:w-[360px] lg:w-[400px] flex flex-col pt-16 sm:pt-20`}
         >
           <div className="p-4 sm:p-6 border-b border-white/5 flex items-center justify-between">
             <div>

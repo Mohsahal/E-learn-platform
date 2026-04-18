@@ -77,7 +77,7 @@ export default function DashboardLayout({
       {/* Sidebar */}
       <aside
         ref={sidebarRef}
-        className={`fixed lg:static inset-y-0 left-0 z-50 bg-[#050e24]/80 backdrop-blur-xl border-r border-white/5 shadow-2xl transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+        className={`fixed lg:static inset-y-0 left-0 z-50 bg-[#050e24]/80 backdrop-blur-xl border-r border-white/5 shadow-2xl transition-all duration-500 [transition-timing-function:cubic-bezier(0.4,0,0.2,1)] ${
           isMobileMenuOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         } ${isSidebarCollapsed ? "w-20" : "w-72"}`}
       >
