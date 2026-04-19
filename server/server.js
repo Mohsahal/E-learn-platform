@@ -224,7 +224,7 @@ const authLimiter = rateLimit({
 
 app.use("/auth", authLimiter);
 app.use((req, res, next) => {
-  if (req.path === "/csrf-token" || req.path === "/health") return next();
+  if (req.path === "/csrf-token" || req.path === "/health" || req.path === "/") return next();
   return generalApiLimiter(req, res, next);
 });
 
@@ -284,7 +284,23 @@ app.get("/health", (req, res) => {
     maintenance: IS_MAINTENANCE_MODE
   });
 });
-console.log("✅ Health route registered (/health)");
+
+// Root route for monitoring and initial landing
+app.get("/", (req, res) => {
+  const indexPath = path.resolve(__dirname, "..", "client", "dist", "index.html");
+  if (fs.existsSync(indexPath)) {
+    return res.sendFile(indexPath);
+  } else {
+    // Return 200 even if build is missing to keep monitors green
+    return res.status(200).json({
+      success: true,
+      message: "Nexora Learn Server is Live",
+      client_status: "Build not detected, serving API only",
+      timestamp: new Date().toISOString()
+    });
+  }
+});
+console.log("✅ Health and Root routes registered");
 
 // Test endpoint to verify CSRF protection is working
 app.post("/test-csrf", (req, res) => {
@@ -316,23 +332,7 @@ app.use((err, req, res, next) => {
 
 // ----------------- SPA Catch-all Route (must be last) -----------------
 app.get("*", (req, res) => {
-  // 1. Specialized handling for the root path "/" to satisfy UptimeRobot/Render
-  if (req.path === "/") {
-    const indexPath = path.resolve(__dirname, "..", "client", "dist", "index.html");
-    if (fs.existsSync(indexPath)) {
-      return res.sendFile(indexPath);
-    } else {
-      // Return 200 even if build is missing to keep monitors green
-      return res.status(200).json({
-        success: true,
-        message: "Nexora Learn Server is Live",
-        client_status: "Build not detected, serving API only",
-        timestamp: new Date().toISOString()
-      });
-    }
-  }
-
-  // 2. Only treat as API if it's an actual API path that wasn't matched by routes above
+  // 1. Only treat as API if it's an actual API path that wasn't matched by routes above
   const apiPrefixes = [
     "/public/", "/auth/", "/secure/", "/media/", "/student/", "/instructor/",
     "/notify/", "/csrf-token", "/health", "/favicon.ico"
