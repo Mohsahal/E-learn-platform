@@ -75,6 +75,7 @@ const allowedOrigins = [
   "https://www.nexoralearn.com",
   // Allow any Render app subdomain for both client and server if configured
   "https://*.onrender.com",
+  "https://client-bbyk.onrender.com"
 ];
 
 // CORS configuration
