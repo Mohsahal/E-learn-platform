@@ -69,33 +69,49 @@ const CORS_ORIGINS = (process.env.CORS_ORIGINS || "")
   .map((o) => o.trim())
   .filter(Boolean);
 
-const allowedOrigins = [
+const allowedExactOrigins = [
   ...CORS_ORIGINS,
   "https://nexoralearn.com",
   "https://www.nexoralearn.com",
-  // Allow any Render app subdomain for both client and server if configured
-  "https://*.onrender.com",
-  "https://client-bbyk.onrender.com"
 ];
+
+/** Wildcard patterns (e.g. https://*.example.com) from env or defaults */
+const allowedOriginPatterns = ["https://*.onrender.com"];
+
+function originMatchesPattern(origin, pattern) {
+  if (!pattern.includes("*")) return origin === pattern;
+  const escaped = pattern
+    .replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+    .replace(/\\\*/g, ".*");
+  return new RegExp("^" + escaped + "$").test(origin);
+}
+
+function isHttpsRenderAppOrigin(origin) {
+  try {
+    const { protocol, hostname } = new URL(origin);
+    return protocol === "https:" && hostname.endsWith(".onrender.com");
+  } catch {
+    return false;
+  }
+}
 
 // CORS configuration
 const corsOptions = {
   origin: function(origin, callback) {
     // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
-    const isAllowed = allowedOrigins.some(o => {
-      if (o.includes("*")) {
-        const escaped = o.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\\\*/g, ".*");
-        const regex = new RegExp("^" + escaped + "$");
-        return regex.test(origin);
-      }
-      return origin === o;
-    });
-    if (isAllowed) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
+
+    const exactOk = allowedExactOrigins.includes(origin);
+    const patternOk = allowedOriginPatterns.some((p) =>
+      originMatchesPattern(origin, p)
+    );
+    const renderOk = isHttpsRenderAppOrigin(origin);
+
+    if (exactOk || patternOk || renderOk) {
+      // Reflect the request origin (required when credentials: true)
+      return callback(null, origin);
     }
+    callback(new Error("Not allowed by CORS"));
   },
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization", "X-CSRF-Token", "X-Requested-With", "Accept"],

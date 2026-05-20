@@ -71,6 +71,9 @@ NODE_ENV=production|development
 JWT_SECRET=your_high_entropy_secret
 CORS_ORIGINS=http://localhost:5173,https://yourdomain.com
 
+# Optional: Socket.IO (defaults to http://localhost:5173)
+CLIENT_URL=https://your-client.onrender.com
+
 # Media (Cloudinary)
 CLOUDINARY_CLOUD_NAME=name
 CLOUDINARY_API_KEY=key
@@ -85,6 +88,18 @@ REDIS_HOST=127.0.0.1
 REDIS_PORT=6379
 REDIS_PASSWORD=password
 ```
+
+### Deploying on Render (CORS)
+
+Browsers block cross-origin requests unless the API sends `Access-Control-Allow-Origin`. This server allows:
+
+- Every origin listed in `CORS_ORIGINS` (comma-separated).
+- `https://nexoralearn.com` and `https://www.nexoralearn.com`.
+- Any **HTTPS** frontend hosted on `*.onrender.com` (for example `https://client-bbyk.onrender.com`).
+
+Set `CORS_ORIGINS` on Render to your exact client URL if you prefer an explicit allowlist, and set `CLIENT_URL` to the same URL for Socket.IO.
+
+**Verify the correct service is deployed:** a GET to `/health` from this LMS API returns JSON with `timestamp` and `environment`. If you see a different payload (for example another `service` name), that Render URL is pointing at a different repository or start command—fix the Render service root/start script so this `server/` app is what runs, then redeploy.
 
 ## 🏃 Running Locally
 
