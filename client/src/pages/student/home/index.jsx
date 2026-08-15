@@ -45,9 +45,7 @@ import {
 } from "lucide-react";
 
 // Re-introducing 3D Scene
-const FuturisticHeroScene = lazy(() =>
-  import("@/components/student-view/futuristic-hero-scene")
-);
+import FuturisticHeroScene from "@/components/student-view/futuristic-hero-scene";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -456,9 +454,7 @@ function StudentHomePage() {
 
         {/* 3D Visual Centerpiece */}
         <div className="absolute right-0 top-0 bottom-0 w-full lg:w-[58%] flex items-center justify-center p-0 overflow-hidden pointer-events-none" style={{ zIndex: 1 }}>
-           <Suspense fallback={<CanvasLoader />}>
-              <FuturisticHeroScene />
-           </Suspense>
+           <FuturisticHeroScene />
            
            {/* Shadow gradient to keep text readable */}
            <div className="absolute inset-y-0 left-0 w-1/3 pointer-events-none"

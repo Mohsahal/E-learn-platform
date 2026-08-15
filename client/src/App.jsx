@@ -1,4 +1,5 @@
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes, Navigate, useLocation } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 import { useContext, lazy, Suspense } from "react";
 const AuthPage = lazy(() => import("./pages/auth"));
 const OAuthSuccess = lazy(() => import("./pages/auth/OAuthSuccess"));
@@ -49,171 +50,183 @@ function HomePageRedirect() {
 }
 
 function App() {
+  const location = useLocation();
+
   return (
     <AnimationProvider>
       <Suspense fallback={<GlobalSkeletonLoader />}>
-        <Routes>
-        {/* Public Routes - No Authentication Required */}
-        <Route path="/verify-certificate/:certificateId" element={<CertificateVerificationPage />} />
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={location.pathname}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3 }}
+          >
+            <Routes location={location} key={location.pathname}>
+            {/* Public Routes - No Authentication Required */}
+            <Route path="/verify-certificate/:certificateId" element={<CertificateVerificationPage />} />
 
-        {/* Public Auth Routes - redirects authenticated users */}
-        <Route
-          path="/auth"
-          element={
-            <PublicRouteGuard>
-              <AuthPage />
-            </PublicRouteGuard>
-          }
-        />
-        <Route
-          path="/signin"
-          element={
-            <PublicRouteGuard>
-              <AuthPage />
-            </PublicRouteGuard>
-          }
-        />
-        <Route
-          path="/signup"
-          element={
-            <PublicRouteGuard>
-              <AuthPage />
-            </PublicRouteGuard>
-          }
-        />
-        <Route
-          path="/forgot-password"
-          element={
-            <PublicRouteGuard>
-              <AuthPage />
-            </PublicRouteGuard>
-          }
-        />
-        <Route
-          path="/reset-password"
-          element={
-            <PublicRouteGuard>
-              <AuthPage />
-            </PublicRouteGuard>
-          }
-        />
-        {/* OAuth success handler — backend redirects here after GitHub/Google login */}
-        <Route path="/oauth-success" element={<OAuthSuccess />} />
-        {/* Legacy alias kept for backward compatibility */}
-        <Route path="/auth/success" element={<OAuthSuccess />} />
+            {/* Public Auth Routes - redirects authenticated users */}
+            <Route
+              path="/auth"
+              element={
+                <PublicRouteGuard>
+                  <AuthPage />
+                </PublicRouteGuard>
+              }
+            />
+            <Route
+              path="/signin"
+              element={
+                <PublicRouteGuard>
+                  <AuthPage />
+                </PublicRouteGuard>
+              }
+            />
+            <Route
+              path="/signup"
+              element={
+                <PublicRouteGuard>
+                  <AuthPage />
+                </PublicRouteGuard>
+              }
+            />
+            <Route
+              path="/forgot-password"
+              element={
+                <PublicRouteGuard>
+                  <AuthPage />
+                </PublicRouteGuard>
+              }
+            />
+            <Route
+              path="/reset-password"
+              element={
+                <PublicRouteGuard>
+                  <AuthPage />
+                </PublicRouteGuard>
+              }
+            />
+            {/* OAuth success handler — backend redirects here after GitHub/Google login */}
+            <Route path="/oauth-success" element={<OAuthSuccess />} />
+            {/* Legacy alias kept for backward compatibility */}
+            <Route path="/auth/success" element={<OAuthSuccess />} />
 
-        {/* Unauthorized Route */}
-        <Route path="/unauthorized" element={<UnauthorizedPage />} />
+            {/* Unauthorized Route */}
+            <Route path="/unauthorized" element={<UnauthorizedPage />} />
 
-        {/* Admin Routes */}
-        <Route
-          path="/admin"
-          element={
-            <AdminRouteGuard>
-              <AdminDashboardpage />
-            </AdminRouteGuard>
-          }
-        />
+            {/* Admin Routes */}
+            <Route
+              path="/admin"
+              element={
+                <AdminRouteGuard>
+                  <AdminDashboardpage />
+                </AdminRouteGuard>
+              }
+            />
 
-        {/* Instructor Routes */}
-        <Route
-          path="/instructor"
-          element={
-            <InstructorRouteGuard>
-              <InstructorDashboardpage />
-            </InstructorRouteGuard>
-          }
-        />
+            {/* Instructor Routes */}
+            <Route
+              path="/instructor"
+              element={
+                <InstructorRouteGuard>
+                  <InstructorDashboardpage />
+                </InstructorRouteGuard>
+              }
+            />
 
-        <Route
-          path="/instructor/create-new-course"
-          element={
-            <InstructorRouteGuard>
-              <AddNewCoursePage />
-            </InstructorRouteGuard>
-          }
-        />
-        <Route
-          path="/instructor/edit-course/:courseId"
-          element={
-            <InstructorRouteGuard>
-              <AddNewCoursePage />
-            </InstructorRouteGuard>
-          }
-        />
-        <Route
-          path="/instructor/certificates"
-          element={
-            <InstructorRouteGuard>
-              <InstructorCertificatesPage />
-            </InstructorRouteGuard>
-          }
-        />
+            <Route
+              path="/instructor/create-new-course"
+              element={
+                <InstructorRouteGuard>
+                  <AddNewCoursePage />
+                </InstructorRouteGuard>
+              }
+            />
+            <Route
+              path="/instructor/edit-course/:courseId"
+              element={
+                <InstructorRouteGuard>
+                  <AddNewCoursePage />
+                </InstructorRouteGuard>
+              }
+            />
+            <Route
+              path="/instructor/certificates"
+              element={
+                <InstructorRouteGuard>
+                  <InstructorCertificatesPage />
+                </InstructorRouteGuard>
+              }
+            />
 
 
-        {/* Student Routes - Mixed Public and Protected */}
-        <Route path="/" element={<StudentViewCommonLayout />}>
-          {/* Public Pages - No Login Required */}
-          <Route path="" element={<HomePageRedirect />} />
-          <Route path="home" element={<HomePageRedirect />} />
-          <Route path="about" element={<AboutPage />} />
-          <Route path="courses" element={<StudentViewCoursesPage />} />
-          
-          {/* Protected Routes - Require Authentication */}
-          <Route
-            path="course/details/:id"
-            element={
-              <StudentRouteGuard>
-                <StudentViewCourseDetailsPage />
-              </StudentRouteGuard>
-            }
-          />
-          <Route
-            path="payment-return"
-            element={
-              <StudentRouteGuard>
-                <PaypalPaymentReturnPage />
-              </StudentRouteGuard>
-            }
-          />
-          <Route
-            path="student-courses"
-            element={
-              <StudentRouteGuard>
-                <StudentCoursesPage />
-              </StudentRouteGuard>
-            }
-          />
+            {/* Student Routes - Mixed Public and Protected */}
+            <Route path="/" element={<StudentViewCommonLayout />}>
+              {/* Public Pages - No Login Required */}
+              <Route path="" element={<HomePageRedirect />} />
+              <Route path="home" element={<HomePageRedirect />} />
+              <Route path="about" element={<AboutPage />} />
+              <Route path="courses" element={<StudentViewCoursesPage />} />
+              
+              {/* Protected Routes - Require Authentication */}
+              <Route
+                path="course/details/:id"
+                element={
+                  <StudentRouteGuard>
+                    <StudentViewCourseDetailsPage />
+                  </StudentRouteGuard>
+                }
+              />
+              <Route
+                path="payment-return"
+                element={
+                  <StudentRouteGuard>
+                    <PaypalPaymentReturnPage />
+                  </StudentRouteGuard>
+                }
+              />
+              <Route
+                path="student-courses"
+                element={
+                  <StudentRouteGuard>
+                    <StudentCoursesPage />
+                  </StudentRouteGuard>
+                }
+              />
 
-          <Route
-            path="course-progress/:id"
-            element={
-              <StudentRouteGuard>
-                <StudentViewCourseProgressPage />
-              </StudentRouteGuard>
-            }
-          />
-          <Route
-            path="learn/:id"
-            element={
-              <StudentRouteGuard>
-                <LearnPage />
-              </StudentRouteGuard>
-            }
-          />
-          <Route
-            path="feedback-support"
-            element={
-              <StudentRouteGuard>
-                <StudentFeedbackSupportPage />
-              </StudentRouteGuard>
-            }
-          />
-        </Route>
+              <Route
+                path="course-progress/:id"
+                element={
+                  <StudentRouteGuard>
+                    <StudentViewCourseProgressPage />
+                  </StudentRouteGuard>
+                }
+              />
+              <Route
+                path="learn/:id"
+                element={
+                  <StudentRouteGuard>
+                    <LearnPage />
+                  </StudentRouteGuard>
+                }
+              />
+              <Route
+                path="feedback-support"
+                element={
+                  <StudentRouteGuard>
+                    <StudentFeedbackSupportPage />
+                  </StudentRouteGuard>
+                }
+              />
+            </Route>
 
-        {/* 404 Route */}
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+            {/* 404 Route */}
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+          </motion.div>
+        </AnimatePresence>
       </Suspense>
     </AnimationProvider>
   );

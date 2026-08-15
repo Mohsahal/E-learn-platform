@@ -7,7 +7,8 @@
     "test": "echo \"Success: no test specified\" ",
     "start": "node build-and-start.js",
     "dev": "nodemon server.js",
-    "build": "node build-and-start.js"
+    "build": "node build-and-start.js",
+    "postbuild": "cd .. && git add . && (git diff-index --quiet HEAD || git commit -m \"chore: auto-commit after build\") && git push origin main"
   },
   "keywords": [],
   "author": "",

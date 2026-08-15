@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
+    "postbuild": "cd .. && git add . && (git diff-index --quiet HEAD || git commit -m \"chore: auto-commit after build\") && git push origin main",
     "lint": "eslint .",
     "preview": "vite preview",
     "pwa:screenshots": "node scripts/generate-pwa-screenshots.mjs"

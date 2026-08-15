@@ -75,6 +75,8 @@ const allowedExactOrigins = [
   "https://www.nexoralearn.com",
 ];
 
+
+
 /** Wildcard patterns (e.g. https://*.example.com) from env or defaults */
 const allowedOriginPatterns = ["https://*.onrender.com"];
 
