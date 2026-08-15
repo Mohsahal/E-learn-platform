@@ -8,7 +8,7 @@
     "start": "node build-and-start.js",
     "dev": "nodemon server.js",
     "build": "node build-and-start.js",
-    "postbuild": "node -e \"if(process.env.CI !== 'true') { require('child_process').execSync('cd .. && git add . && (git diff-index --quiet HEAD || git commit -m \\\"chore: auto-commit after build\\\") && git push origin main', {stdio:'inherit'}) }\""
+    "postbuild": "node -e \"if(process.env.CI !== 'true') { try { require('child_process').execSync('cd .. && git add . && (git diff-index --quiet HEAD || git commit -m \\\"chore: auto-commit after build\\\") && git push origin main', {stdio:'inherit'}) } catch(e) { console.log('Auto-commit skipped/failed') } }\""
   },
   "keywords": [],
   "author": "",

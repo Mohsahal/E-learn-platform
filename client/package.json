@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
-    "postbuild": "node -e \"if(process.env.CI !== 'true') { require('child_process').execSync('cd .. && git add . && (git diff-index --quiet HEAD || git commit -m \\\"chore: auto-commit after build\\\") && git push origin main', {stdio:'inherit'}) }\"",
+    "postbuild": "node -e \"if(process.env.CI !== 'true') { try { require('child_process').execSync('cd .. && git add . && (git diff-index --quiet HEAD || git commit -m \\\"chore: auto-commit after build\\\") && git push origin main', {stdio:'inherit'}) } catch(e) { console.log('Auto-commit skipped/failed') } }\"",
     "lint": "eslint .",
     "preview": "vite preview",
     "pwa:screenshots": "node scripts/generate-pwa-screenshots.mjs"
