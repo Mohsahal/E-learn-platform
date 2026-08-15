@@ -8,7 +8,7 @@
     "start": "node build-and-start.js",
     "dev": "nodemon server.js",
     "build": "node build-and-start.js",
-    "postbuild": "cd .. && git add . && (git diff-index --quiet HEAD || git commit -m \"chore: auto-commit after build\") && git push origin main"
+    "postbuild": "node -e \"if(process.env.CI !== 'true') { require('child_process').execSync('cd .. && git add . && (git diff-index --quiet HEAD || git commit -m \\\"chore: auto-commit after build\\\") && git push origin main', {stdio:'inherit'}) }\""
   },
   "keywords": [],
   "author": "",
