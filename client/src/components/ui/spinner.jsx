@@ -125,14 +125,10 @@ export function SpinnerFullPage() {
         </div>
 
         {/* Luxury Typography */}
-        <div className="flex items-center justify-center gap-3">
+        <div className="flex items-center justify-center">
           <h1 className="text-3xl sm:text-4xl font-extrabold tracking-[0.25em] pl-[0.25em] bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-100 to-slate-400">
             NEXORA
           </h1>
-          <div className="w-[1px] h-6 bg-gradient-to-b from-transparent via-white/25 to-transparent hidden sm:block" />
-          <span className="text-lg sm:text-xl font-light tracking-[0.38em] pl-[0.38em] text-slate-400 uppercase hidden sm:inline-block">
-            LEARN
-          </span>
         </div>
 
         {/* Sleek Hairline Progress Loader */}

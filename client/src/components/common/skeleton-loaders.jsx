@@ -258,15 +258,11 @@ export const GlobalSkeletonLoader = () => {
           </svg>
         </div>
 
-        {/* Luxury Typography Hierarchy */}
-        <div className="flex items-center justify-center gap-4">
+        {/* Luxury Typography */}
+        <div className="flex items-center justify-center">
           <h1 className="text-4xl sm:text-5xl font-extrabold tracking-[0.25em] pl-[0.25em] bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-100 to-slate-400 drop-shadow-[0_4px_24px_rgba(255,255,255,0.12)]">
             NEXORA
           </h1>
-          <div className="w-[1px] h-7 bg-gradient-to-b from-transparent via-white/25 to-transparent hidden sm:block" />
-          <span className="text-xl sm:text-2xl font-light tracking-[0.38em] pl-[0.38em] text-slate-400 uppercase hidden sm:inline-block">
-            LEARN
-          </span>
         </div>
 
         {/* Minimalist Subtitle */}

@@ -65,7 +65,7 @@ function StudentViewCommonHeader() {
           <Link
             to="/home"
             className="flex items-center flex-shrink-0 gap-2"
-            aria-label="NEXORA LEARN Home"
+            aria-label="NEXORA Home"
           >
             <TextLogo />
           </Link>

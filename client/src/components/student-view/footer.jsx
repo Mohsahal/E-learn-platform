@@ -82,7 +82,7 @@ function Footer() {
           </div> */}
 
           <p className="text-sm font-semibold mb-1" style={{ color: "#94a3b8" }}>
-            NEXORA LEARN
+            NEXORA
           </p>
           <p className="text-xs mb-5" style={{ color: "#94a3b8" }}>
             Cultivating success together — your premier gateway to professional education.
