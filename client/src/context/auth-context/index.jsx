@@ -308,7 +308,7 @@ export default function AuthProvider({ children }) {
       }}
     >
       {loading ? (
-        <GlobalSkeletonLoader />
+        <div className="min-h-screen bg-[#020617]" />
       ) : children}
     </AuthContext.Provider>
   );

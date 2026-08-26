@@ -7,9 +7,9 @@ export default function RouteGuard({ children, requireAuth = true, allowedRoles 
   const { auth, loading } = useContext(AuthContext);
   const location = useLocation();
 
-  // Show loading skeleton while checking authentication
+  // Silent background during route authentication check to avoid flashing spinners
   if (loading) {
-    return <GlobalSkeletonLoader />;
+    return <div className="min-h-screen bg-[#020617]" />;
   }
 
   // If route requires authentication but user is not authenticated

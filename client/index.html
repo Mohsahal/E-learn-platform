@@ -76,21 +76,36 @@
       }
 
       @keyframes floatGlow {
-        0% { transform: translate(0, 0) scale(1); }
-        50% { transform: translate(40px, -30px) scale(1.05); }
-        100% { transform: translate(-30px, 40px) scale(0.95); }
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+
+        50% {
+          transform: translate(40px, -30px) scale(1.05);
+        }
+
+        100% {
+          transform: translate(-30px, 40px) scale(0.95);
+        }
       }
 
       @keyframes pulseCore {
-        0% { opacity: 0.4; transform: translate(-50%, -50%) scale(0.9); }
-        100% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.2); }
+        0% {
+          opacity: 0.4;
+          transform: translate(-50%, -50%) scale(0.9);
+        }
+
+        100% {
+          opacity: 0.9;
+          transform: translate(-50%, -50%) scale(1.2);
+        }
       }
 
       /* Subtle Architectural Line Grid */
       .luxury-grid {
         position: absolute;
         inset: 0;
-        background-image: 
+        background-image:
           linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
           linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
         background-size: 64px 64px;
@@ -111,8 +126,15 @@
       }
 
       @keyframes fadeInLuxury {
-        0% { opacity: 0; transform: translateY(16px) scale(0.96); }
-        100% { opacity: 1; transform: translateY(0) scale(1); }
+        0% {
+          opacity: 0;
+          transform: translateY(16px) scale(0.96);
+        }
+
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
       }
 
       /* Emblem Mark */
@@ -136,8 +158,15 @@
       }
 
       @keyframes haloBreath {
-        0% { transform: scale(0.85); opacity: 0.5; }
-        100% { transform: scale(1.2); opacity: 1; }
+        0% {
+          transform: scale(0.85);
+          opacity: 0.5;
+        }
+
+        100% {
+          transform: scale(1.2);
+          opacity: 1;
+        }
       }
 
       .emblem-svg {
@@ -159,13 +188,23 @@
       }
 
       @keyframes spinCW {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
+        from {
+          transform: rotate(0deg);
+        }
+
+        to {
+          transform: rotate(360deg);
+        }
       }
 
       @keyframes spinCCW {
-        from { transform: rotate(360deg); }
-        to { transform: rotate(0deg); }
+        from {
+          transform: rotate(360deg);
+        }
+
+        to {
+          transform: rotate(0deg);
+        }
       }
 
       .flare-dot {
@@ -173,8 +212,16 @@
       }
 
       @keyframes flareGlow {
-        0% { r: 2.5; opacity: 0.6; }
-        100% { r: 4; opacity: 1; filter: drop-shadow(0 0 8px #38bdf8); }
+        0% {
+          r: 2.5;
+          opacity: 0.6;
+        }
+
+        100% {
+          r: 4;
+          opacity: 1;
+          filter: drop-shadow(0 0 8px #38bdf8);
+        }
       }
 
       /* Brand Typography */
@@ -264,9 +311,20 @@
       }
 
       @keyframes progressFlow {
-        0% { left: -40%; width: 25%; }
-        50% { left: 35%; width: 45%; }
-        100% { left: 110%; width: 25%; }
+        0% {
+          left: -40%;
+          width: 25%;
+        }
+
+        50% {
+          left: 35%;
+          width: 45%;
+        }
+
+        100% {
+          left: 110%;
+          width: 25%;
+        }
       }
 
       .loader-status {
@@ -280,8 +338,14 @@
       }
 
       @keyframes statusBreathe {
-        0% { opacity: 0.4; }
-        100% { opacity: 0.85; color: #94a3b8; }
+        0% {
+          opacity: 0.4;
+        }
+
+        100% {
+          opacity: 0.85;
+          color: #94a3b8;
+        }
       }
     </style>
 
@@ -317,8 +381,10 @@
             </defs>
 
             <!-- Precision Celestial Halo Rings -->
-            <circle cx="60" cy="60" r="54" fill="none" stroke="url(#haloGrad)" stroke-width="1.2" stroke-dasharray="14 10 4 10" class="ring-rotate-cw" />
-            <circle cx="60" cy="60" r="46" fill="none" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" stroke-dasharray="30 40" class="ring-rotate-ccw" />
+            <circle cx="60" cy="60" r="54" fill="none" stroke="url(#haloGrad)" stroke-width="1.2"
+              stroke-dasharray="14 10 4 10" class="ring-rotate-cw" />
+            <circle cx="60" cy="60" r="46" fill="none" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1"
+              stroke-dasharray="30 40" class="ring-rotate-ccw" />
 
             <!-- Isometric Faceted Monogram 'N' -->
             <polygon points="36,28 46,22 46,92 36,98" fill="url(#prismA)" />

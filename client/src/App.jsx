@@ -32,9 +32,9 @@ import { GlobalSkeletonLoader } from "./components/common/skeleton-loaders";
 function HomePageRedirect() {
   const { auth, loading } = useContext(AuthContext);
 
-  // Show loading skeleton while checking authentication
+  // Silent background while checking authentication during redirect
   if (loading) {
-    return <GlobalSkeletonLoader />;
+    return <div className="min-h-screen bg-[#020617]" />;
   }
 
   // If user is authenticated, redirect to appropriate dashboard based on role
@@ -54,7 +54,7 @@ function App() {
 
   return (
     <AnimationProvider>
-      <Suspense fallback={<GlobalSkeletonLoader />}>
+      <Suspense fallback={<div className="min-h-screen bg-[#020617]" />}>
         <AnimatePresence mode="wait">
           <motion.div
             key={location.pathname}

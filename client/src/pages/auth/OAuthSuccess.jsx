@@ -52,7 +52,7 @@ function OAuthSuccess() {
     }
   }, [searchParams, navigate, checkAuthUser]);
 
-  return <GlobalSkeletonLoader />;
+  return <div className="min-h-screen bg-[#020617]" />;
 }
 
 export default OAuthSuccess;
